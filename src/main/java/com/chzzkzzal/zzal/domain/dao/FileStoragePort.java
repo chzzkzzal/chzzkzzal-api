@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.service;
+package com.chzzkzzal.zzal.domain.dao;
 
 import org.springframework.web.multipart.MultipartFile;
 

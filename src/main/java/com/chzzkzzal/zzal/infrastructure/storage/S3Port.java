@@ -3,7 +3,7 @@ package com.chzzkzzal.zzal.infrastructure.storage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chzzkzzal.zzal.domain.service.FileStoragePort;
+import com.chzzkzzal.zzal.domain.dao.FileStoragePort;
 
 @Service
 public class S3Port implements FileStoragePort {
