@@ -33,4 +33,13 @@ public class GifZzal implements Zzal {
 
 	}
 
+	@Override
+	public void view() {
+
+	}
+
+	@Override
+	public int countTotalView() {
+		return 0;
+	}
 }
