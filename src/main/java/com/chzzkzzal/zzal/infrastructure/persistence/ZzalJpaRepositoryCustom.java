@@ -12,29 +12,28 @@ import com.chzzkzzal.zzal.domain.model.Zzal;
 
 import lombok.RequiredArgsConstructor;
 
-@Repository
 @RequiredArgsConstructor
-public class ZzalJpaRepositoryImpl implements DeleteZzalPort, LoadZzalPort, SaveZzalPort {
+@Repository
+public class ZzalJpaRepositoryCustom implements SaveZzalPort, LoadZzalPort, DeleteZzalPort {
 	private final ZzalJpaRepository jpaRepository;
 
 	@Override
-	public Optional<Zzal> findById(Long zzalId) {
-		Optional<Zzal> zzal = jpaRepository.findById(zzalId);
-		return zzal;
-	}
+	public void deleteById(Long id) {
 
-	@Override
-	public void save(Zzal zzal) {
-		jpaRepository.save(zzal);
 	}
 
 	@Override
 	public List<Zzal> findAll() {
-		return jpaRepository.findAll();
+		return null;
 	}
 
 	@Override
-	public void deleteById(Long zzalId) {
-		jpaRepository.deleteById(zzalId);
+	public Optional<Zzal> findById(Long id) {
+		return Optional.empty();
+	}
+
+	@Override
+	public void save(Zzal post) {
+
 	}
 }

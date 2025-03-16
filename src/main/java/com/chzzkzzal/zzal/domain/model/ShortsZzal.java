@@ -2,9 +2,6 @@ package com.chzzkzzal.zzal.domain.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class ShortsZzal implements Zzal {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long shortsZzalId;
+public class ShortsZzal extends Zzal {
 
 	private String title;
 	private String content;
