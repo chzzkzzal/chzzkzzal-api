@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    favicon:
+      enabled:false
   application:
     name: chzzkzzal
   datasource:
@@ -19,3 +22,14 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
     database-platform: org.hibernate.dialect.H2Dialect
+
+# 하루 = 86400
+session:
+  timeout: 86400
+
+# 쿠키 시간 늘리기
+server:
+  reactive:
+    session:
+      cookie:
+        max-age: 86400

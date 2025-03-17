@@ -1,0 +1,22 @@
+### 회원가입
+
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "name": "김진수",
+  "email": "kkk@gmail.com",
+  "password": "1234"
+}
+
+### 로그인
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "hodolman88@gamil.com",
+  "password": "1234"
+}
+
+username=kim&password=1234&remember=1
