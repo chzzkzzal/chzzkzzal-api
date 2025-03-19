@@ -1,22 +1,9 @@
-### 회원가입
 
-POST http://localhost:8080/auth/signup
+### 치지직 토큰 폐기
+POST http://localhost:8080/revoke
 Content-Type: application/json
 
 {
-  "name": "김진수",
-  "email": "kkk@gmail.com",
-  "password": "1234"
+  "token": "LT7t-xR2eDpdZ8WkZjXNLhkGzUDgsJSTn4HWTQyXUmaFkgZueG0Hj4Dy6riORUtHEzSXKw8MuNTzp8eThEDncQ",
+  "tokenTypeHint": "access_token"
 }
-
-### 로그인
-
-POST http://localhost:8080/auth/login
-Content-Type: application/json
-
-{
-  "email": "hodolman88@gamil.com",
-  "password": "1234"
-}
-
-username=kim&password=1234&remember=1

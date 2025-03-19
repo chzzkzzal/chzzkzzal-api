@@ -33,7 +33,9 @@ public class ApiControllerAdvice {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ApiResponse<?>> handleException(Exception e) {
 		log.error("Exception : {}", e.getMessage(), e);
-		return new ResponseEntity<>(ApiResponse.error(ErrorType.DEFAULT_ERROR), ErrorType.DEFAULT_ERROR.getStatus());
+		ApiResponse<?> error = ApiResponse.error(ErrorType.DEFAULT_ERROR, e.getMessage());
+		return new ResponseEntity<>(error, ErrorType.DEFAULT_ERROR.getStatus());
+		// return new ResponseEntity<>(ApiResponse.error(ErrorType.DEFAULT_ERROR), ErrorType.DEFAULT_ERROR.getStatus());
 	}
 
 }

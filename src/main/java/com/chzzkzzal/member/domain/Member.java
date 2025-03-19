@@ -1,6 +1,8 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.member.domain;
 
 import java.time.LocalDateTime;
+
+import com.chzzkzzal.zzal.domain.model.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,23 +26,23 @@ public class Member extends BaseTimeEntity {
 
 	private Long id;
 
-	private String name;
-	private String email;
+	private String channelName;
+	private String channelId;
 
 	private String password;
 
-	public Member(LocalDateTime createdAt, LocalDateTime updatedAt, Long id, String name, String email,
+	public Member(LocalDateTime createdAt, LocalDateTime updatedAt, Long id, String channelName, String channelId,
 		String password) {
 		super(createdAt, updatedAt);
 		this.id = id;
-		this.name = name;
-		this.email = email;
+		this.channelName = channelName;
+		this.channelId = channelId;
 		this.password = password;
 	}
 
-	public Member(String name, String email, String password) {
-		this.name = name;
-		this.email = email;
+	public Member(String channelName, String channelId, String password) {
+		this.channelName = channelName;
+		this.channelId = channelId;
 		this.password = password;
 	}
 }
