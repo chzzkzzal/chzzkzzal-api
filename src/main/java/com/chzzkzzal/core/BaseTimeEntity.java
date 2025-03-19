@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.core;
 
 import java.time.LocalDateTime;
 

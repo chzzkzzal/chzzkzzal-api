@@ -1,9 +1,8 @@
-package com.chzzkzzal.member.domain;
+package com.chzzkzzal.core.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.jwt.JwtProvider;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
 
@@ -11,10 +10,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ChzzkAuthService {
+public class ChzzkAPIService {
 	private final ChzzkApiClient chzzkApiClient;
-	private final MemberService memberService;
-	private final JwtProvider jwtProvider;
 
 	@Value("${chzzk.oauth.client-id}")
 	private String clientId;
@@ -43,14 +40,6 @@ public class ChzzkAuthService {
 			"[INFO] signUp user channelId=" + userDto.channelId() + ", channelName=" + userDto.channelName()
 		);
 		return userDto;
-	}
-
-	public String signin(String channelId, String channelName) {
-
-		Member member = memberService.findOrCreate(channelId, channelName);
-
-		String token = jwtProvider.createAccessToken(member.getChannelId());
-		return token;
 	}
 
 }

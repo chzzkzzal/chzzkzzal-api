@@ -1,4 +1,4 @@
-package com.chzzkzzal.member.domain;
+package com.chzzkzzal.core.client;
 
 import java.util.HashMap;
 import java.util.Map;

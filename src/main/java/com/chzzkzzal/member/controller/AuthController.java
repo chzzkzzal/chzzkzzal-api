@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.member.domain.AuthService;
+import com.chzzkzzal.member.domain.refreshJwtTokenService;
 import com.chzzkzzal.member.dto.RefreshTokenRequest;
 import com.chzzkzzal.member.dto.TokenResponse;
 
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final AuthService authService;
+	private final refreshJwtTokenService refreshJwtTokenService;
 
 	/**
 	 * Refresh Token 이용하여 새 Access Token 발급
@@ -27,7 +27,7 @@ public class AuthController {
 	@PostMapping("/refresh")
 	public ResponseEntity<?> refresh(@RequestBody RefreshTokenRequest request) {
 		// 1) 서비스 호출
-		TokenResponse tokenResponse = authService.refreshAccessToken(request.refreshToken());
+		TokenResponse tokenResponse = refreshJwtTokenService.refreshAccessToken(request.refreshToken());
 
 		// 2) 결과 반환
 		//    tokenResponse 안에 "accessToken" 만 담아도 되고,

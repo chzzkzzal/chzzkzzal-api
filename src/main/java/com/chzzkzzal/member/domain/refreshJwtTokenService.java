@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class refreshJwtTokenService {
 
 	private final JwtProvider jwtProvider;
 	private final MemberRepository memberRepository;

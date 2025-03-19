@@ -2,7 +2,7 @@ package com.chzzkzzal.member.domain;
 
 import java.time.LocalDateTime;
 
-import com.chzzkzzal.zzal.domain.model.BaseTimeEntity;
+import com.chzzkzzal.core.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

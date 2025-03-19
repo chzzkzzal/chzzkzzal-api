@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.member.domain.ChzzkAuthService;
+import com.chzzkzzal.core.client.ChzzkAPIService;
+import com.chzzkzzal.member.domain.MemberService;
 import com.chzzkzzal.member.dto.ChzzkRevokeRequest;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
@@ -20,17 +21,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping
 public class ChzzkOAuthController {
 
-	private final ChzzkAuthService chzzkAuthService;
+	private final ChzzkAPIService chzzkAPIService;
+	private final MemberService memberService;
 
 	@GetMapping("${chzzk.oauth.redirection-url}")
 	public ResponseEntity<?> callback(
 		@RequestParam("code") String code,
 		@RequestParam("state") String state
 	) {
-		ChzzkTokenResponse tokenResponse = chzzkAuthService.getAccessTokenFromChzzk(code, state);
+		ChzzkTokenResponse tokenResponse = chzzkAPIService.getAccessTokenFromChzzk(code, state);
 		String accessToken = tokenResponse.accessToken();
-		ChzzkUserResponse userInfo = chzzkAuthService.getUserInfo(accessToken);
-		String jwtToken = chzzkAuthService.signin(userInfo.channelId(), userInfo.channelName());
+		ChzzkUserResponse userInfo = chzzkAPIService.getUserInfo(accessToken);
+		String jwtToken = memberService.signin(userInfo.channelId(), userInfo.channelName());
 
 		tokenDto tokenDto = new tokenDto(tokenResponse, userInfo, jwtToken);
 		return ResponseEntity.ok(tokenDto);
@@ -38,11 +40,11 @@ public class ChzzkOAuthController {
 
 	@PostMapping("/revoke")
 	public ResponseEntity<String> revokeToken(@RequestBody ChzzkRevokeRequest request) {
-		String revokeResult = chzzkAuthService.revokeToken(request.getToken(), request.getTokenTypeHint());
+		String revokeResult = chzzkAPIService.revokeToken(request.getToken(), request.getTokenTypeHint());
 		return ResponseEntity.ok(revokeResult);
 	}
 
-	static record tokenDto(
+	record tokenDto(
 		ChzzkTokenResponse chzzkTokenResponse,
 		ChzzkUserResponse chzzkUserResponse,
 		String jwtToken

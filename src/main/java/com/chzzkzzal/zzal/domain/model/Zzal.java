@@ -1,5 +1,7 @@
 package com.chzzkzzal.zzal.domain.model;
 
+import com.chzzkzzal.core.BaseTimeEntity;
+
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
