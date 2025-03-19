@@ -1,0 +1,9 @@
+
+### 치지직 토큰 폐기
+POST http://localhost:8080/revoke
+Content-Type: application/json
+
+{
+  "token": "LT7t-xR2eDpdZ8WkZjXNLhkGzUDgsJSTn4HWTQyXUmaFkgZueG0Hj4Dy6riORUtHEzSXKw8MuNTzp8eThEDncQ",
+  "tokenTypeHint": "access_token"
+}
