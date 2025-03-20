@@ -1,14 +1,12 @@
-package com.chzzkzzal.zzal.domain.config;
+package com.chzzkzzal.member.domain;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.chzzkzzal.zzal.domain.model.Member;
-
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-	Optional<Member> findByEmail(String email);
+	Optional<Member> findByChannelId(String channelId);
 
 }

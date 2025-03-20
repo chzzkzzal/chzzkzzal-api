@@ -1,5 +1,7 @@
 package com.chzzkzzal.zzal.domain.model;
 
+import com.chzzkzzal.member.domain.Member;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

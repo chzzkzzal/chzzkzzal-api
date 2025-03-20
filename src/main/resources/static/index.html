@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>치지직 로그인 데모 (index)</title>
+</head>
+<body>
+<h1>치지직 로그인 데모</h1>
+
+<script>
+    // 치지직 앱 정보
+    const clientId = "0aa21664-c1d8-4a6b-907c-f2d7d660bdd0";
+
+    const redirectUri = "http://localhost:8080/callback";
+
+    const state = "zxclDasdfA25"; // 임의 값
+    const authBaseUrl = "https://chzzk.naver.com/account-interlock";
+
+    // 치지직 인증 페이지로 이동
+    function redirectToAuthorization() {
+        const url = new URL(authBaseUrl);
+        url.searchParams.set("clientId", clientId);
+        url.searchParams.set("redirectUri", redirectUri);
+        url.searchParams.set("state", state);
+
+        // 브라우저가 치지직 인증 페이지로 이동 → 로그인/동의 후 callback.html 로 돌아옴
+        window.location.href = url.toString();
+    }
+</script>
+
+<button onclick="redirectToAuthorization()">치지직 로그인</button>
+</body>
+</html>
