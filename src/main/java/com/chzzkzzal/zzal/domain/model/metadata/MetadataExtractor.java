@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.metadata;
 
 import org.springframework.web.multipart.MultipartFile;
 

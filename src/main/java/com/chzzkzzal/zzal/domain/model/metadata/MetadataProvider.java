@@ -1,7 +1,10 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.metadata;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MetadataProvider<T> {
 
 	private final FileValidator fileValidator;
-	private final ImageMetadataExtractor imageMetadataExtractor;
 	private final GifMetadataExtractor gifMetadataExtractor;
+	private final PicMetadataExtractor picMetadataExtractor;
 
 	public Object getMetadata(MultipartFile multipartFile) {
 		try {
@@ -23,17 +26,15 @@ public class MetadataProvider<T> {
 				throw new IllegalArgumentException("파일 형식 정보가 없습니다.");
 			}
 
-			ImageContentType imageContentType = ImageContentType.fromString(contentType);
+			MultipartFileContentType zzalContentType = MultipartFileContentType.fromString(contentType);
+			ZzalType zzalType = zzalContentType.toZzalType();
 
-			switch (imageContentType) {
+			switch (zzalType) {
 				case GIF:
 					GifInfo gifInfo = gifMetadataExtractor.extract(multipartFile);
 					return gifInfo;
-				case JPEG:
-				case JPG:
-				case PNG:
-				case SVG:
-					ImageInfo imageInfo = imageMetadataExtractor.extract(multipartFile);
+				case PIC:
+					ImageInfo imageInfo = picMetadataExtractor.extract(multipartFile);
 					return imageInfo;
 
 					default:

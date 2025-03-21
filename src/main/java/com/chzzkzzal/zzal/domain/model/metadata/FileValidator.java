@@ -1,10 +1,8 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.metadata;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.chzzkzzal.zzal.domain.model.AllowedFileExtension;
 
 @Component
 public class FileValidator {

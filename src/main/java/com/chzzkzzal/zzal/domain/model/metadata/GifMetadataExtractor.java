@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.metadata;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -50,7 +50,7 @@ public class GifMetadataExtractor implements MetadataExtractor {
             }
             int width = image.getWidth();
             int height = image.getHeight();
-            return new GifInfo(file.getSize(), width, height, numFrames, totalSeconds);
+            return new GifInfo(file.getSize(), width, height, numFrames, totalSeconds, file.getContentType(), file.getOriginalFilename());
 
         } catch (IOException e) {
             throw new RuntimeException(e);

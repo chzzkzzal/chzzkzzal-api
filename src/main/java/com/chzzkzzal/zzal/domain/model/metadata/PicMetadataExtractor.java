@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.metadata;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
-public class ImageMetadataExtractor implements MetadataExtractor{
+public class PicMetadataExtractor implements MetadataExtractor{
 
     public ImageInfo extract(MultipartFile file){
         byte[] fileBytes = new byte[0];
