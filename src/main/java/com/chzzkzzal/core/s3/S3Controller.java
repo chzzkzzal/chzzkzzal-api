@@ -39,9 +39,4 @@ public class S3Controller {
 		return ResponseEntity.ok(fileUrl);
 	}
 
-	@PostMapping("tt")
-	public String uplole(@RequestParam("files") MultipartFile multipartFiles) {
-		 s3Service.getFileMetadata(multipartFiles);
-		 return "1";
-	}
 }

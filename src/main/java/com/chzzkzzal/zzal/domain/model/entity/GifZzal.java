@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.entity;
 
 import com.chzzkzzal.member.domain.Member;
 

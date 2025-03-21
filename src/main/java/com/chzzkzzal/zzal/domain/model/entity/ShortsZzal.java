@@ -1,21 +1,28 @@
-package com.chzzkzzal.zzal.domain.model;
+package com.chzzkzzal.zzal.domain.model.entity;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@DiscriminatorValue("PIC")
+@DiscriminatorValue("SHORTS")
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
-public class PicZzal extends Zzal {
+public class ShortsZzal extends Zzal {
+
+	private String title;
+	private String content;
+	private String videoUrl;
 
 	@Override
 	public Zzal upload() {
-		return null;
+		return new ShortsZzal();
+
 	}
 
 	@Override
@@ -32,5 +39,4 @@ public class PicZzal extends Zzal {
 	public int countTotalView() {
 		return 0;
 	}
-
 }

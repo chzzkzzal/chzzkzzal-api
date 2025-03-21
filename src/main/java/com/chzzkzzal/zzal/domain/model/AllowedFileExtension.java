@@ -1,10 +1,11 @@
-package com.chzzkzzal.core.s3.service;
+package com.chzzkzzal.zzal.domain.model;
 
 public enum AllowedFileExtension {
     JPG("jpg"),
     JPEG("jpeg"),
     SVG("svg"),
-    PNG("png");
+    PNG("png"),
+    GIF("gif");
 
     private final String extension;
 
