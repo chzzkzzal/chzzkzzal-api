@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.s3.model.S3Object;
+import com.chzzkzzal.core.s3.service.S3Service;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +24,7 @@ public class S3Controller {
 
 	@PostMapping
 	public ResponseEntity<List<String>> uploadFile(@RequestParam("files") List<MultipartFile> multipartFiles) {
-		return ResponseEntity.ok(s3Service.uploadFile(multipartFiles));
+		return ResponseEntity.ok(s3Service.uploadFiles(multipartFiles));
 	}
 
 	@DeleteMapping
