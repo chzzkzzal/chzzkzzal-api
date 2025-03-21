@@ -26,8 +26,7 @@ public class MemberUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// OAuth 가입만 한다면, 비밀번호가 없을 수 있으므로 null or ""
-		return member.getPassword();
+		return null;
 	}
 
 	@Override
