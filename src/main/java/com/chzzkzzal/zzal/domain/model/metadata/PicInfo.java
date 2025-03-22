@@ -1,13 +1,13 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
-public class ImageInfo {
+public class PicInfo {
     private long size;
     private int width;
     private int height;
     private String contentType;
     private String fileName;
 
-    public ImageInfo(long size, int width, int height, String contentType, String fileName) {
+    public PicInfo(long size, int width, int height, String contentType, String fileName) {
         this.size = size;
         this.width = width;
         this.height = height;
