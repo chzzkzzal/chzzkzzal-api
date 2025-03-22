@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class PicMetadataExtractor implements MetadataExtractor{
 
-    public ImageInfo extract(MultipartFile file){
+    public PicInfo extract(MultipartFile file){
         byte[] fileBytes = new byte[0];
         try {
             fileBytes = file.getBytes();
@@ -27,7 +27,7 @@ public class PicMetadataExtractor implements MetadataExtractor{
             int width = image.getWidth();
             int height = image.getHeight();
             // 파일 크기는 MultipartFile에서 직접 가져올 수 있음
-            return new ImageInfo(file.getSize(), width, height, file.getContentType(), file.getOriginalFilename());
+            return new PicInfo(file.getSize(), width, height, file.getContentType(), file.getOriginalFilename());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

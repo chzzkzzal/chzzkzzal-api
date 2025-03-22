@@ -19,4 +19,6 @@ public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmar
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String title;
+
 }

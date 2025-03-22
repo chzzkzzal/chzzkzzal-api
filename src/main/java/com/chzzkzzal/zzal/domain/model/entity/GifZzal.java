@@ -3,6 +3,7 @@ package com.chzzkzzal.zzal.domain.model.entity;
 import com.chzzkzzal.member.domain.Member;
 
 import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,7 +23,6 @@ public class GifZzal extends Zzal {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-	private String title;
 
 	@Override
 	public Zzal upload() {

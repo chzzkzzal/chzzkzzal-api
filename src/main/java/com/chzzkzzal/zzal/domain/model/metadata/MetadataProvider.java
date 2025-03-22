@@ -34,8 +34,8 @@ public class MetadataProvider<T> {
 					GifInfo gifInfo = gifMetadataExtractor.extract(multipartFile);
 					return gifInfo;
 				case PIC:
-					ImageInfo imageInfo = picMetadataExtractor.extract(multipartFile);
-					return imageInfo;
+					PicInfo picInfo = picMetadataExtractor.extract(multipartFile);
+					return picInfo;
 
 					default:
 					throw new IllegalArgumentException("지원되지 않는 이미지 형식입니다: " + contentType);

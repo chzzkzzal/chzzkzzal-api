@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ShortsZzal extends Zzal {
 
-	private String title;
 	private String content;
 	private String videoUrl;
 
