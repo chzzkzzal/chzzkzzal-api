@@ -27,18 +27,21 @@ public class GifZzal extends Zzal {
 
 	@Embedded
 	private GifInfo zzalMetaInfo;
-	public static GifZzal create(Member member, GifInfo gifInfo, String title) {
+
+	private String url;
+	public static GifZzal create(Member member, GifInfo gifInfo, String title,String url) {
 		GifZzal gifZzal = new GifZzal();
 		gifZzal.member = member;
 		gifZzal.zzalMetaInfo = gifInfo;
 		gifZzal.title = title; // 상위 클래스의 title 필드 설정
+		gifZzal.url = url;
 		return gifZzal;
 	}
-	public static GifZzal create(Member member, ZzalMetaInfo metadata, String title) {
+	public static GifZzal create(Member member, ZzalMetaInfo metadata, String title,String url) {
 		if (!(metadata instanceof GifInfo)) {
 			throw new IllegalArgumentException("metadata는 GifInfo의 인스턴스여야 합니다.");
 		}
-		return create(member, (GifInfo) metadata, title);
+		return create(member, (GifInfo) metadata, title,url);
 	}
 
 	@Override

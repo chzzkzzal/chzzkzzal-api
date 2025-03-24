@@ -36,9 +36,10 @@ public class ZzalUploadServiceImpl implements ZzalUploadService {
 			.filter(f -> f.supports(metadata))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("지원되지 않는 Zzal 유형입니다."));
+		String fileName = s3ServicePort.uploadFile(multipartFile);
 
-		Zzal zzal = factory.createZzal(member, metadata, multipartFile.getOriginalFilename());
-		s3ServicePort.uploadFile(multipartFile);
+		String fileUrl = s3ServicePort.getFileUrl(fileName);
+		Zzal zzal = factory.createZzal(member, metadata, multipartFile.getOriginalFilename(),fileUrl);
 		saveZzalPort.save(zzal);
 
 	}
