@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class S3Deleter {
+class S3Deleter {
 
 	private final S3Repository s3Repository;
 

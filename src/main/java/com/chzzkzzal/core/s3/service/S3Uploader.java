@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class S3Uploader {
+class S3Uploader {
 
 	private final S3Repository s3Repository;
 	private final FileNameGenerator fileNameGenerator;
