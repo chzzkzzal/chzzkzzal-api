@@ -1,16 +1,22 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
+import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class GifInfo {
-    private final long size;
-    private final int width;
-    private final int height;
-    private final int frameCount;
-    private final double totalDuration;
-    private final String contentType;
-    private final String fileName;
+public class GifInfo implements ZzalMetaInfo {
+    private  long size;
+    private  int width;
+    private  int height;
+    private  int frameCount;
+    private  double totalDuration;
+    private  String contentType;
+    private  String fileName;
+
+    protected GifInfo() {
+    }
 
     public GifInfo(long size, int width, int height, int frameCount, double totalDuration, String contentType,
         String fileName) {

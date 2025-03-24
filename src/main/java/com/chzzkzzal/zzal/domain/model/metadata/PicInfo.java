@@ -1,11 +1,16 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
-public class PicInfo {
+import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+
+public class PicInfo implements ZzalMetaInfo {
     private long size;
     private int width;
     private int height;
     private String contentType;
     private String fileName;
+    protected PicInfo() {
+        // JPA용
+    }
 
     public PicInfo(long size, int width, int height, String contentType, String fileName) {
         this.size = size;

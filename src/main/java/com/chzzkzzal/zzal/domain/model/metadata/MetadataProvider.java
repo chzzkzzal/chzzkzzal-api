@@ -3,6 +3,7 @@ package com.chzzkzzal.zzal.domain.model.metadata;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
 import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class MetadataProvider<T> {
 	private final GifMetadataExtractor gifMetadataExtractor;
 	private final PicMetadataExtractor picMetadataExtractor;
 
-	public Object getMetadata(MultipartFile multipartFile) {
+	public ZzalMetaInfo getMetadata(MultipartFile multipartFile) {
 		try {
 			fileValidator.validateExtension(multipartFile.getOriginalFilename());
 

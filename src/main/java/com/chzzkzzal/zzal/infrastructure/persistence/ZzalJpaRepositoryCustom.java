@@ -33,7 +33,7 @@ public class ZzalJpaRepositoryCustom implements SaveZzalPort, LoadZzalPort, Dele
 	}
 
 	@Override
-	public void save(Zzal post) {
-
+	public void save(Zzal zzal) {
+		jpaRepository.save(zzal);
 	}
 }
