@@ -1,6 +1,7 @@
 package com.chzzkzzal.zzal.domain.model.entity;
 
 import com.chzzkzzal.core.BaseTimeEntity;
+import com.chzzkzzal.member.domain.Member;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -24,5 +25,6 @@ public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmar
 
 	abstract public String getUrl();
 	abstract public ZzalMetaInfo getMetaInfo();
+	abstract public Member getMember();
 
 }

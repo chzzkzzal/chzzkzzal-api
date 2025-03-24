@@ -24,7 +24,7 @@ public class ZzalJpaRepositoryCustom implements SaveZzalPort, LoadZzalPort, Dele
 
 	@Override
 	public List<Zzal> findAll() {
-		return null;
+		return jpaRepository.findAll();
 	}
 
 	@Override

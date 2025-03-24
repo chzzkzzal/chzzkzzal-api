@@ -1,7 +1,5 @@
 package com.chzzkzzal.zzal.domain.model.entity;
 
-import org.springframework.context.annotation.Lazy;
-
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.zzal.domain.model.metadata.GifInfo;
 
