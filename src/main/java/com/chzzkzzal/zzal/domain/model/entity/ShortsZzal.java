@@ -38,4 +38,14 @@ public class ShortsZzal extends Zzal {
 	public int countTotalView() {
 		return 0;
 	}
+
+	@Override
+	public String getUrl() {
+		return null;
+	}
+
+	@Override
+	public ZzalMetaInfo getMetaInfo() {
+		return null;
+	}
 }

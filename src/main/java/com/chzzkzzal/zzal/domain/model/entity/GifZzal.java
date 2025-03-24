@@ -1,8 +1,9 @@
 package com.chzzkzzal.zzal.domain.model.entity;
 
+import org.springframework.context.annotation.Lazy;
+
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.zzal.domain.model.metadata.GifInfo;
-import com.chzzkzzal.zzal.domain.model.metadata.PicInfo;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
@@ -26,13 +27,13 @@ public class GifZzal extends Zzal {
 	private Member member;
 
 	@Embedded
-	private GifInfo zzalMetaInfo;
+	private GifInfo metaInfo;
 
 	private String url;
 	public static GifZzal create(Member member, GifInfo gifInfo, String title,String url) {
 		GifZzal gifZzal = new GifZzal();
 		gifZzal.member = member;
-		gifZzal.zzalMetaInfo = gifInfo;
+		gifZzal.metaInfo = gifInfo;
 		gifZzal.title = title; // 상위 클래스의 title 필드 설정
 		gifZzal.url = url;
 		return gifZzal;

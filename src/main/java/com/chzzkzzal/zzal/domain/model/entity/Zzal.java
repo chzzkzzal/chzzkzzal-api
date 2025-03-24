@@ -22,5 +22,7 @@ public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmar
 
 	protected String title;
 
+	abstract public String getUrl();
+	abstract public ZzalMetaInfo getMetaInfo();
 
 }

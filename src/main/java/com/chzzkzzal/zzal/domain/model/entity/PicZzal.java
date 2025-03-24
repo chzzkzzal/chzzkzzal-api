@@ -4,13 +4,10 @@ import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.zzal.domain.model.metadata.PicInfo;
 
 import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,14 +20,14 @@ public class PicZzal extends Zzal {
 	@JoinColumn(name = "member_id")
 	private Member member;
 	@Embedded
-	private PicInfo  picInfo;
+	private PicInfo metaInfo;
 
 	private String url;
 
 	public static PicZzal create(Member member, PicInfo picInfo, String title, String url) {
 		PicZzal picZzal = new PicZzal();
 		picZzal.member = member;
-		picZzal.picInfo = picInfo;
+		picZzal.metaInfo = picInfo;
 		picZzal.title = title;
 		picZzal.url = url;
 		return picZzal;

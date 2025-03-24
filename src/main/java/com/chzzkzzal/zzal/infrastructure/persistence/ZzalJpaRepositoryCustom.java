@@ -29,7 +29,7 @@ public class ZzalJpaRepositoryCustom implements SaveZzalPort, LoadZzalPort, Dele
 
 	@Override
 	public Optional<Zzal> findById(Long id) {
-		return Optional.empty();
+		return jpaRepository.findById(id);
 	}
 
 	@Override
