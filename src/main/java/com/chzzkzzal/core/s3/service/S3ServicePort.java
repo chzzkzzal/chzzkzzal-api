@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public interface S3Service {
+public interface S3ServicePort {
 	List<String> uploadFiles(List<MultipartFile> multipartFiles);
 	String uploadFile(MultipartFile multipartFile);
 

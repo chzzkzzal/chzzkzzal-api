@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class S3ServiceImpl implements S3Service {
+public class S3ServicePortImpl implements S3ServicePort {
 
 	private final S3Uploader s3Uploader;
 	private final S3Deleter s3Deleter;
