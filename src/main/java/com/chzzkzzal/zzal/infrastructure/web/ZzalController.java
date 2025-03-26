@@ -39,7 +39,7 @@ public class ZzalController {
 		return zzalDetailService.loadDetail(memberId, zzalId);
 	}
 
-	@GetMapping()
+	@GetMapping
 	public List<ZzalDetailResponse> getAll() {
 		return zzalGetAllService.getAll();
 	}

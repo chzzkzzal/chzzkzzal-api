@@ -16,14 +16,13 @@
     const state = "zxclDasdfA25"; // 임의 값
     const authBaseUrl = "https://chzzk.naver.com/account-interlock";
 
-    // 치지직 인증 페이지로 이동
+    // 치지직 인증 페이지로 이동 후 결과적으로는 스프링 서버의 json 응답을 받음.
     function redirectToAuthorization() {
         const url = new URL(authBaseUrl);
         url.searchParams.set("clientId", clientId);
         url.searchParams.set("redirectUri", redirectUri);
         url.searchParams.set("state", state);
 
-        // 브라우저가 치지직 인증 페이지로 이동 → 로그인/동의 후 callback.html 로 돌아옴
         window.location.href = url.toString();
     }
 </script>

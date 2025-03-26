@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
+
 @Component
 public class PicMetadataExtractor implements MetadataExtractor{
 
