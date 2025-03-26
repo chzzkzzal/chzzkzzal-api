@@ -1,7 +1,9 @@
 package com.chzzkzzal.member.controller;
 
 import java.net.URI;
+import java.time.Duration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -26,9 +28,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
+	@Value("${cookie.name}")
+	private String COOKIE_NAME;
+
+	@Value("${cookie.domain}")
+	private String COOKIE_DOMAIN;
+
+	@Value("${cookie.path}")
+	private String COOKIE_PATH;
+	@Value("${cookie.days}")
+	private int COOKIE_DAYS;
+	@Value("${cookie.same_site}")
+	private String COOKIE_SAME_SITE;
+
 
 	private final ChzzkAPIService chzzkAPIService;
 	private final MemberService memberService;
+
 
 	@GetMapping("${chzzk.oauth.redirection-url}")
 	public ResponseEntity<?> callback(
@@ -42,18 +58,19 @@ public class ChzzkOAuthController {
 		String jwtToken = memberService.signin(userInfo.channelId(), userInfo.channelName());
 
 		// JWT 토큰을 HTTP-only 쿠키로 설정
-		ResponseCookie cookie = ResponseCookie.from("jwtToken", jwtToken)
+		ResponseCookie cookie = ResponseCookie.from(COOKIE_NAME, jwtToken)
+			.domain(COOKIE_DOMAIN)
 			.httpOnly(true)
 			.secure(false) // 로컬호스트에서는 false, 프로덕션에서는 true로 설정
-			.path("/")
-			.maxAge(7 * 24 * 60 * 60) // 7일 유효기간 (초 단위)
-			.sameSite("Lax") // CSRF 보호
+			.path(COOKIE_PATH)
+			.maxAge(Duration.ofDays(COOKIE_DAYS))
+			.sameSite(COOKIE_SAME_SITE) // CSRF 보호
 			.build();
 
 		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
-		// 리다이렉트 응답 생성
 		return ResponseEntity.status(HttpStatus.FOUND)
+			.header(HttpHeaders.SET_COOKIE,cookie.toString())
 			.location(URI.create("http://localhost:3000"))
 			.build();
 	}
