@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class SecurityConfig {
-	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final CustomOncePerRequestFilter customOncePerRequestFilter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -43,7 +43,7 @@ public class SecurityConfig {
 				// .anyRequest().authenticated()
 			)
 			.formLogin(FormLoginConfigurer::disable)
-			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(customOncePerRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}

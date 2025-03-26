@@ -19,15 +19,14 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter implements AuthenticationFilter {
 
 	private static final String AUTH_HEADER = "Authorization";
 	private static final String BEARER_PREFIX = "Bearer ";
 	private final JwtProvider jwtProvider;
 	private final MemberRepository memberRepository;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 		throws ServletException, IOException {
 
 		// 1) Authorization 헤더에서 'Bearer' 토큰 추출
