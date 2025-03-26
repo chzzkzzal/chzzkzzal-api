@@ -1,8 +1,7 @@
-package com.chzzkzzal.core.security;
+package com.chzzkzzal.core.auth.filter;
 
 import java.io.IOException;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Component
-@Primary
 @RequiredArgsConstructor
 public class CustomOncePerRequestFilter extends OncePerRequestFilter {
 	private final AuthenticationFilter authenticationFilter;

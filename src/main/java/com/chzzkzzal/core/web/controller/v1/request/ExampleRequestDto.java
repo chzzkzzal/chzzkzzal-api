@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.api.controller.v1.request;
+package com.chzzkzzal.core.web.controller.v1.request;
 
 import com.chzzkzzal.zzal.domain.dto.ExampleData;
 

@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.api.controller;
+package com.chzzkzzal.core.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

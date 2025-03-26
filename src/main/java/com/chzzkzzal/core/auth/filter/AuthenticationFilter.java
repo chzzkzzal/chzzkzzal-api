@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.security;
+package com.chzzkzzal.core.auth.filter;
 
 import java.io.IOException;
 

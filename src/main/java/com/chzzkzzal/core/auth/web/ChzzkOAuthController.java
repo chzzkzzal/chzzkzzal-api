@@ -1,4 +1,4 @@
-package com.chzzkzzal.member.controller;
+package com.chzzkzzal.core.auth.web;
 
 import java.net.URI;
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.api.controller;
+package com.chzzkzzal.core.web.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

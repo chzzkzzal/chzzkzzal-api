@@ -1,4 +1,4 @@
-package com.chzzkzzal.core;
+package com.chzzkzzal.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

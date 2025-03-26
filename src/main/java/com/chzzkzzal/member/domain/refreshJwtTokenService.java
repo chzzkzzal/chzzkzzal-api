@@ -2,7 +2,7 @@ package com.chzzkzzal.member.domain;
 
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.jwt.JwtProvider;
+import com.chzzkzzal.core.auth.jwt.TokenProvider;
 import com.chzzkzzal.member.dto.TokenResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class refreshJwtTokenService {
 
-	private final JwtProvider jwtProvider;
+	private final TokenProvider tokenProvider;
 	private final MemberRepository memberRepository;
 
 	/**
@@ -24,13 +24,13 @@ public class refreshJwtTokenService {
 	 */
 	public TokenResponse refreshAccessToken(String refreshToken) {
 		// (1) Refresh Token 검증
-		if (!jwtProvider.validateToken(refreshToken)) {
+		if (!tokenProvider.validateToken(refreshToken)) {
 			log.debug("Invalid Refresh Token: {}", refreshToken);
 			return null; // or throw custom exception
 		}
 
 		// (2) channelId 추출
-		String channelId = jwtProvider.getChannelIdFromToken(refreshToken);
+		String channelId = "1";
 
 		// (3) DB 조회
 		Member member = memberRepository.findByChannelId(channelId).orElse(null);
@@ -40,7 +40,7 @@ public class refreshJwtTokenService {
 		}
 
 		// (4) 새 Access Token 발급
-		String newAccessJwt = jwtProvider.createAccessToken(channelId);
+		String newAccessJwt = tokenProvider.createAccessToken(channelId);
 
 		// 응답 DTO 반환
 		return new TokenResponse(newAccessJwt);

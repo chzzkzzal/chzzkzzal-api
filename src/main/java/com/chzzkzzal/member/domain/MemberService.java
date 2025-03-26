@@ -3,7 +3,7 @@ package com.chzzkzzal.member.domain;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.jwt.JwtProvider;
+import com.chzzkzzal.core.auth.jwt.TokenProvider;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
 	private final MemberRepository memberRepository;
-	private final JwtProvider jwtProvider;
+	private final TokenProvider tokenProvider;
 	private final PasswordEncoder passwordEncoder;
 
 	/**
@@ -21,7 +21,7 @@ public class MemberService {
 
 		Member member = findOrCreate(channelId, channelName);
 
-		String token = jwtProvider.createAccessToken(member.getChannelId());
+		String token = tokenProvider.createAccessToken(member.getChannelId());
 		return token;
 	}
 

@@ -1,4 +1,4 @@
-package com.chzzkzzal.member.controller;
+package com.chzzkzzal.core.auth.web;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.core.jwt.JwtProvider;
+import com.chzzkzzal.core.auth.jwt.TokenProvider;
 import com.chzzkzzal.member.domain.refreshJwtTokenService;
 import com.chzzkzzal.member.dto.RefreshTokenRequest;
 import com.chzzkzzal.member.dto.TokenResponse;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthController {
 
 	private final refreshJwtTokenService refreshJwtTokenService;
-	private final JwtProvider jwtProvider;
+	private final TokenProvider tokenProvider;
 
 	/**
 	 * Refresh Token 이용하여 새 Access Token 발급
@@ -63,7 +63,7 @@ public class AuthController {
 		boolean isAuthenticated = false;
 		System.out.println(jwtToken);
 		if (jwtToken != null) {
-			isAuthenticated = jwtProvider.validateToken(jwtToken); // JWT 검증 로직
+			isAuthenticated = tokenProvider.validateToken(jwtToken); // JWT 검증 로직
 		}
 		System.out.println("로그인 여부 확인");
 		System.out.println(isAuthenticated);

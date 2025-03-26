@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.security;
+package com.chzzkzzal.core.auth.domain;
 
 import java.util.Collection;
 import java.util.List;
