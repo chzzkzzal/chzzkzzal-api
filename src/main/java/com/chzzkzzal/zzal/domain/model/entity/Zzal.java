@@ -15,6 +15,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmarkable, Viewable {
 
 	@Id
