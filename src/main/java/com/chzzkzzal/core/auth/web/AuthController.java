@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chzzkzzal.core.auth.jwt.TokenProvider;
-import com.chzzkzzal.member.domain.refreshJwtTokenService;
+import com.chzzkzzal.member.domain.RefreshTokenService;
 import com.chzzkzzal.member.dto.RefreshTokenRequest;
 import com.chzzkzzal.member.dto.TokenResponse;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final refreshJwtTokenService refreshJwtTokenService;
+	private final RefreshTokenService RefreshTokenService;
 	private final TokenProvider tokenProvider;
 
 	/**
@@ -34,7 +35,7 @@ public class AuthController {
 	@PostMapping("/refresh")
 	public ResponseEntity<?> refresh(@RequestBody RefreshTokenRequest request) {
 		// 1) 서비스 호출
-		TokenResponse tokenResponse = refreshJwtTokenService.refreshAccessToken(request.refreshToken());
+		String tokenResponse = RefreshTokenService.refreshAccessToken(request.refreshToken());
 
 		// 2) 결과 반환
 		//    tokenResponse 안에 "accessToken" 만 담아도 되고,

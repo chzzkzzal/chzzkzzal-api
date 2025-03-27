@@ -1,17 +1,24 @@
 package com.chzzkzzal.member.domain;
 
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.chzzkzzal.core.auth.exception.RefreshTokenInvalidException;
 import com.chzzkzzal.core.auth.jwt.TokenProvider;
+import com.chzzkzzal.core.auth.jwt.TokenResult;
 import com.chzzkzzal.member.dto.TokenResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class refreshJwtTokenService {
+public class RefreshTokenService {
 
 	private final TokenProvider tokenProvider;
 	private final MemberRepository memberRepository;
@@ -22,7 +29,7 @@ public class refreshJwtTokenService {
 	 * 3) DB 조회
 	 * 4) 새 Access Token 발급
 	 */
-	public TokenResponse refreshAccessToken(String refreshToken) {
+	public String refreshAccessToken(String refreshToken) {
 		// (1) Refresh Token 검증
 		if (!tokenProvider.validateToken(refreshToken)) {
 			log.debug("Invalid Refresh Token: {}", refreshToken);
@@ -43,6 +50,8 @@ public class refreshJwtTokenService {
 		String newAccessJwt = tokenProvider.createAccessToken(channelId);
 
 		// 응답 DTO 반환
-		return new TokenResponse(newAccessJwt);
+		return newAccessJwt;
 	}
+
+
 }
