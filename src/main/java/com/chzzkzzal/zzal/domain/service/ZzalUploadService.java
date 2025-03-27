@@ -7,5 +7,5 @@ import com.chzzkzzal.zzal.domain.model.entity.Zzal;
 
 @Service
 public interface ZzalUploadService {
-	void upload(Long memberId, MultipartFile multipartFile);
+	void upload(String title,Long memberId, MultipartFile multipartFile);
 }
