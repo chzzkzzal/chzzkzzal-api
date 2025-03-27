@@ -2,9 +2,9 @@ package com.chzzkzzal.zzal.domain.model.factory;// PicZzalFactory.java
 import org.springframework.stereotype.Component;
 
 import com.chzzkzzal.member.domain.Member;
-import com.chzzkzzal.zzal.domain.model.entity.PicZzal;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.PicZzal;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 import com.chzzkzzal.zzal.domain.model.metadata.PicInfo;
 
 @Component

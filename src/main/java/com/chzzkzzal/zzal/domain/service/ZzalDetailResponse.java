@@ -3,9 +3,8 @@ package com.chzzkzzal.zzal.domain.service;
 import java.time.LocalDateTime;
 
 import com.chzzkzzal.member.domain.Member;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
-import com.chzzkzzal.zzal.domain.model.metadata.PicInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 
 public record ZzalDetailResponse(
 	Long zzalId,

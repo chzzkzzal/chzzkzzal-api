@@ -10,8 +10,8 @@ import com.chzzkzzal.core.s3.service.S3ServicePort;
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.member.domain.MemberLoader;
 import com.chzzkzzal.zzal.domain.dao.SaveZzalPort;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 import com.chzzkzzal.zzal.domain.model.factory.ZzalFactory;
 import com.chzzkzzal.zzal.domain.model.metadata.MetadataProvider;
 

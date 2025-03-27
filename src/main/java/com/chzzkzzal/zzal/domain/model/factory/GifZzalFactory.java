@@ -2,9 +2,9 @@ package com.chzzkzzal.zzal.domain.model.factory;// GifZzalFactory.java
 import org.springframework.stereotype.Component;
 
 import com.chzzkzzal.member.domain.Member;
-import com.chzzkzzal.zzal.domain.model.entity.GifZzal;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.GifZzal;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 import com.chzzkzzal.zzal.domain.model.metadata.GifInfo;
 
 @Component

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.member.domain.MemberLoader;
 import com.chzzkzzal.zzal.domain.dao.LoadZzalPort;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 
 
 import jakarta.persistence.EntityNotFoundException;
