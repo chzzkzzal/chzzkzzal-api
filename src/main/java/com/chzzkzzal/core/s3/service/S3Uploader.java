@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.chzzkzzal.core.s3.S3Repository;
+import com.chzzkzzal.zzal.domain.model.metadata.FileValidator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class S3Uploader {
+class S3Uploader {
 
 	private final S3Repository s3Repository;
 	private final FileNameGenerator fileNameGenerator;

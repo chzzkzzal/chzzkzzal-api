@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.chzzkzzal.zzal.domain.dao.DeleteZzalPort;
 import com.chzzkzzal.zzal.domain.dao.LoadZzalPort;
 import com.chzzkzzal.zzal.domain.dao.SaveZzalPort;
-import com.chzzkzzal.zzal.domain.model.Zzal;
+import com.chzzkzzal.zzal.domain.model.entity.Zzal;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,16 +24,16 @@ public class ZzalJpaRepositoryCustom implements SaveZzalPort, LoadZzalPort, Dele
 
 	@Override
 	public List<Zzal> findAll() {
-		return null;
+		return jpaRepository.findAll();
 	}
 
 	@Override
 	public Optional<Zzal> findById(Long id) {
-		return Optional.empty();
+		return jpaRepository.findById(id);
 	}
 
 	@Override
-	public void save(Zzal post) {
-
+	public void save(Zzal zzal) {
+		jpaRepository.save(zzal);
 	}
 }

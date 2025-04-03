@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class S3UrlProvider {
+class S3UrlProvider {
 
 	private final S3Repository s3Repository;
 
