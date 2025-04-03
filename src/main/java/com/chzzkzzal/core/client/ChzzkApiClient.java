@@ -89,7 +89,9 @@ public class ChzzkApiClient {
 		System.out.println("[DEBUG] user info JSON = " + rawJson);
 
 		try {
-			return objectMapper.readValue(rawJson, ChzzkUserResponse.class);
+			JsonNode root = objectMapper.readTree(rawJson);
+			JsonNode contentNode = root.get("content");
+			return objectMapper.treeToValue(contentNode, ChzzkUserResponse.class);
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException("Failed to parse user info JSON", e);
 		}

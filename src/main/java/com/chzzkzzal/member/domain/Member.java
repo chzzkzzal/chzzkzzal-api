@@ -29,20 +29,16 @@ public class Member extends BaseTimeEntity {
 	private String channelName;
 	private String channelId;
 
-	private String password;
 
-	public Member(LocalDateTime createdAt, LocalDateTime updatedAt, Long id, String channelName, String channelId,
-		String password) {
+	public Member(LocalDateTime createdAt, LocalDateTime updatedAt, Long id, String channelName, String channelId) {
 		super(createdAt, updatedAt);
 		this.id = id;
 		this.channelName = channelName;
 		this.channelId = channelId;
-		this.password = password;
 	}
 
-	public Member(String channelName, String channelId, String password) {
+	public Member(String channelName, String channelId) {
 		this.channelName = channelName;
 		this.channelId = channelId;
-		this.password = password;
 	}
 }
