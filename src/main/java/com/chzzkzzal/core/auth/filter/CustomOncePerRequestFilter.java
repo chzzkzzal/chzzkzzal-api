@@ -15,10 +15,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomOncePerRequestFilter extends OncePerRequestFilter {
 	private final AuthenticationFilter authenticationFilter;
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
-
+		// 1) H2-console 요청이면 그냥 통과
+		String uri = request.getRequestURI();
+		if (uri.startsWith("/h2-console")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
 		authenticationFilter.doFilterInternal(request,response,filterChain);
 
 	}
