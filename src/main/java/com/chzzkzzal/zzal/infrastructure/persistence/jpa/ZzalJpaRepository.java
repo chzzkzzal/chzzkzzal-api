@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.infrastructure.persistence;
+package com.chzzkzzal.zzal.infrastructure.persistence.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

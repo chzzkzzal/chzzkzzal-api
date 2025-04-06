@@ -4,6 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface ZzalDetailService {
 
-	ZzalDetailResponse loadDetail(Long memberId, Long zzalId, HttpServletRequest request);
+	ZzalDetailResponse getZZal(Long memberId, Long zzalId, HttpServletRequest request);
 }
 

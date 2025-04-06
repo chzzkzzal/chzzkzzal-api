@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +44,7 @@ public class ZzalController {
 		Long memberId = memberUserDetails != null ? memberUserDetails.getMember().getId() : null;
 
 		// Long memberId = Long.valueOf(1);
-		return zzalDetailService.loadDetail(memberId, zzalId,request);
+		return zzalDetailService.getZZal(memberId, zzalId,request);
 	}
 
 	@GetMapping
