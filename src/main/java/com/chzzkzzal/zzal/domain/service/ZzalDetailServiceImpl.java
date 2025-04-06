@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.member.domain.MemberLoader;
+import com.chzzkzzal.zzal.Events;
+import com.chzzkzzal.zzal.ZzalViewedEvent;
 import com.chzzkzzal.zzal.domain.dao.LoadZzalPort;
 import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 import com.chzzkzzal.myviewhistory.MyViewHistoryService;
@@ -24,26 +26,15 @@ public class ZzalDetailServiceImpl implements ZzalDetailService{
 
 	private final MemberLoader memberLoader;
 	private final LoadZzalPort loadZzalPort;
-	private final ZzalHitsService zzalHitsService;
-	private final MyViewHistoryService myViewHistoryService;
-	private final ZzalViewLogService zzalViewLogService;
+
 
 	public ZzalDetailResponse getZZal(Long memberId, Long zzalId, HttpServletRequest request){
-		ZzalHits zzalHits = zzalHitsService.addHits(zzalId, request);
-		zzalViewLogService.addViewLog(getZzalViewLogDto(memberId, zzalId, zzalHits));
-		if (memberId != null) {
-			myViewHistoryService.addMemberViewHistory(zzalId, memberId);
-		}
+
 		Zzal zzal = loadZzalPort.findById(zzalId).orElseThrow(() -> new EntityNotFoundException("짤이 DB에 없는데용?"));
 		Long uploaderId = zzal.getMember().getId();
 		Member member = memberLoader.loadMember(uploaderId);
+		Events.raise(new ZzalViewedEvent(zzalId,request,member.getId()));
 		return ZzalDetailResponse.toResponse(zzal,member);
 	}
 
-	private static ZzalViewLogDto getZzalViewLogDto(Long memberId, Long zzalId, ZzalHits zzalHits) {
-		return new ZzalViewLogDto(
-			zzalId, memberId, zzalHits.getUniqueIdentifier(), zzalHits.getIpAddress(), zzalHits.getUserAgent(),
-			zzalHits.getBrowserType(), zzalHits.getDeviceType(),
-			LocalDateTime.now());
-	}
 }
