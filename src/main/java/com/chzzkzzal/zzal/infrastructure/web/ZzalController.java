@@ -32,10 +32,10 @@ public class ZzalController {
 	private final ZzalGetAllService zzalGetAllService;
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void upload(@RequestPart(value = "file") MultipartFile multipartFile,
+	public Long upload(@RequestPart(value = "file") MultipartFile multipartFile,
 		@RequestPart(value = "zzalCreateRequest") ZzalCreateRequest zzalCreateRequest) {
 		Long memberId = Long.valueOf(1);
-		zzalUploadService.upload(zzalCreateRequest.title(),memberId, multipartFile);
+		return zzalUploadService.upload(zzalCreateRequest.title(), memberId, multipartFile);
 	}
 
 	@GetMapping("{zzalId}")
@@ -44,7 +44,7 @@ public class ZzalController {
 		Long memberId = memberUserDetails != null ? memberUserDetails.getMember().getId() : null;
 
 		// Long memberId = Long.valueOf(1);
-		return zzalDetailService.getZZal(memberId, zzalId,request);
+		return zzalDetailService.getZZal(memberId, zzalId, request);
 	}
 
 	@GetMapping

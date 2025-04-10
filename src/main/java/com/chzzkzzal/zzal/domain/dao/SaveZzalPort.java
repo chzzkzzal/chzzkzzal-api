@@ -7,5 +7,5 @@ import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 public interface SaveZzalPort {
 	Optional<Zzal> findById(Long id);
 
-	void save(Zzal post);
+	Zzal save(Zzal post);
 }
