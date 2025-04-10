@@ -1,10 +1,9 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class GifInfo implements ZzalMetaInfo {

@@ -1,9 +1,9 @@
 package com.chzzkzzal.zzal.domain.service;
 
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface ZzalDetailService {
 
-	ZzalDetailResponse loadDetail(Long memberId, Long zzalId);
+	ZzalDetailResponse getZZal(Long memberId, Long zzalId, HttpServletRequest request);
 }
 

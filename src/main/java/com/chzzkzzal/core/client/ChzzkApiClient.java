@@ -1,12 +1,10 @@
 package com.chzzkzzal.core.client;
 
-import java.util.HashMap;
+import static org.springframework.http.HttpMethod.*;
+
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -18,94 +16,143 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class ChzzkApiClient {
 	private static final String TOKEN_URL = "https://openapi.chzzk.naver.com/auth/v1/token";
 	private static final String REVOKE_URL = "https://openapi.chzzk.naver.com/auth/v1/token/revoke";
 	private static final String USER_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/users/me";
+	private static final String CHANNEL_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/channels";
 
 	private final ObjectMapper objectMapper;
 	private final RestTemplate restTemplate;
+	private final ChzzkRequestBuilderFactory chzzkRequestBuilderFactory;
 
 	/**
 	 * 치지직 액세스 토큰 발급 요청
 	 */
-	public ChzzkTokenResponse fetchAccessToken(String clientId, String clientSecret, String code, String state) {
-		Map<String, String> requestBody = new HashMap<>();
-		requestBody.put("grantType", "authorization_code");
-		requestBody.put("clientId", clientId);
-		requestBody.put("clientSecret", clientSecret);
-		requestBody.put("code", code);
-		requestBody.put("state", state);
+	public ChzzkTokenResponse fetchAccessToken(String code, String state) {
+		ChzzkRequestBuilder request = chzzkRequestBuilderFactory.createBuilder(POST, TOKEN_URL);
+		ChzzkApiStrategy<HttpEntity<Map<String, String>>> strategy = () -> {
+			request.setBody("grantType", "authorization_code");
+			request.setBody("code", code);
+			request.setBody("state", state);
+			return request.toHttpEntity();
+		};
 
-		String rawJson = sendPostRequest(TOKEN_URL, requestBody);
-		System.out.println("[DEBUG] raw JSON = " + rawJson);
+		HttpEntity<Map<String, String>> entity = strategy.callback();
 
-		try {
-			JsonNode root = objectMapper.readTree(rawJson);
-			JsonNode contentNode = root.get("content");
-			if (contentNode == null || contentNode.isNull()) {
-				throw new RuntimeException("No 'content' field found in the response JSON.");
+		ChzzkResponseBuilder<ChzzkTokenResponse>  strategy2 = ()->{
+			ResponseEntity<String> response = restTemplate.postForEntity(request.getUrl(), entity, String.class);
+			String rawJson = response.getBody();
+			log.info("[DEBUG] raw JSON = {}", rawJson);
+
+			try {
+				JsonNode contentNode = objectMapper.readTree(rawJson).get("content");
+				validateNull(contentNode);
+
+				ChzzkTokenResponse tokenDto = objectMapper.treeToValue(contentNode, ChzzkTokenResponse.class);
+				log.info("[DEBUG] tokenDto = {}",tokenDto);
+				return tokenDto;
+			} catch (JsonProcessingException e) {
+				throw new RuntimeException("Failed to parse JSON from Chzzk token response", e);
 			}
+		};
+		ChzzkTokenResponse callback = strategy2.callback();
+		return callback;
 
-			ChzzkTokenResponse tokenDto = objectMapper.treeToValue(contentNode, ChzzkTokenResponse.class);
-			System.out.println("[DEBUG] tokenDto = " + tokenDto);
-			return tokenDto;
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("Failed to parse JSON from Chzzk token response", e);
+	}
+
+	private void validateNull(JsonNode contentNode) {
+		if (contentNode == null || contentNode.isNull()) {
+			throw new RuntimeException("No 'content' field found in the response JSON.");
 		}
 	}
 
 	/**
 	 * 치지직 토큰 폐기 요청
 	 */
-	public String revokeToken(String clientId, String clientSecret, String token, String tokenTypeHint) {
-		Map<String, String> requestBody = new HashMap<>();
-		requestBody.put("clientId", clientId);
-		requestBody.put("clientSecret", clientSecret);
-		requestBody.put("token", token);
+	public String revokeToken(String token, String tokenTypeHint) {
+		ChzzkRequestBuilder request = chzzkRequestBuilderFactory.createBuilder(POST,REVOKE_URL);
 
-		String finalHint = (tokenTypeHint == null || tokenTypeHint.isEmpty()) ? "access_token" : tokenTypeHint;
-		requestBody.put("tokenTypeHint", finalHint);
+		ChzzkApiStrategy<HttpEntity<Map<String, String>>> strategy = () -> {
+			request.setBody("token",token);
+			String finalHint = (tokenTypeHint == null || tokenTypeHint.isEmpty()) ? "access_token" : tokenTypeHint;
+			request.setBody("tokenTypeHint", finalHint);
+			return request.toHttpEntity();
+		};
 
-		return sendPostRequest(REVOKE_URL, requestBody);
+		HttpEntity<Map<String, String>> entity = strategy.callback();
+
+		ChzzkResponseBuilder<String> strategy2 = () -> {
+			ResponseEntity<String> response = restTemplate.postForEntity(request.getUrl(), entity, String.class);
+			return response.getBody();
+		};
+		String callback = strategy2.callback();
+		return callback;
 	}
 
 	/**
 	 * 치지직 유저 정보 조회 요청
 	 */
 	public ChzzkUserResponse fetchUserInfo(String accessToken) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", "Bearer " + accessToken);
-		headers.setContentType(MediaType.APPLICATION_JSON);
+		ChzzkRequestBuilder request = chzzkRequestBuilderFactory.createBuilder(GET, USER_INFO_URL);
 
-		HttpEntity<Void> entity = new HttpEntity<>(headers);
-		ResponseEntity<String> response = restTemplate
-			.exchange(USER_INFO_URL, HttpMethod.GET, entity, String.class);
+		ChzzkApiStrategy<HttpEntity<Map<String, String>>> strategy = () -> {
+			request.setHeader("Authorization", "Bearer " + accessToken);
+			return request.toHttpEntity();
+		};
+		HttpEntity<Map<String, String>> entity = strategy.callback();
 
-		String rawJson = response.getBody();
-		System.out.println("[DEBUG] user info JSON = " + rawJson);
+		ChzzkResponseBuilder<ChzzkUserResponse> strategy2 = () -> {
+			ResponseEntity<String> response = restTemplate.exchange(request.getUrl(), request.getHttpMethod(), entity, String.class);
 
-		try {
-			JsonNode root = objectMapper.readTree(rawJson);
-			JsonNode contentNode = root.get("content");
-			return objectMapper.treeToValue(contentNode, ChzzkUserResponse.class);
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("Failed to parse user info JSON", e);
-		}
+			String rawJson = response.getBody();
+			log.info("[DEBUG] user info JSON = {}",rawJson);
+
+			try {
+				JsonNode root = objectMapper.readTree(rawJson);
+				JsonNode contentNode = root.get("content");
+				return objectMapper.treeToValue(contentNode, ChzzkUserResponse.class);
+			} catch (JsonProcessingException e) {
+				throw new RuntimeException("Failed to parse user info JSON", e);
+			}
+		};
+		ChzzkUserResponse callback = strategy2.callback();
+		return  callback;
+
+	}
+	public String fetchChannelInfo(String[] channelIds) {
+		ChzzkRequestBuilder request = chzzkRequestBuilderFactory.createBuilder(GET,CHANNEL_INFO_URL);
+
+
+		ChzzkApiStrategy<HttpEntity<Map<String, String>>> strategy = () -> {
+			request.setBodies("channelIds",channelIds);
+			return request.toHttpEntity();
+		};
+		HttpEntity<Map<String, String>> entity = strategy.callback();
+
+		// API 호출
+		ChzzkResponseBuilder<String> strategy2 = () -> {
+			ResponseEntity<String> response = restTemplate.exchange(request.getUrl(), request.getHttpMethod(), entity, String.class);
+
+			String rawJson = response.getBody();
+			log.info("[DEBUG] user info JSON = {}",rawJson);
+			return rawJson;
+		};
+
+		return  strategy2.callback();
+
+		// try {
+		// 	JsonNode root = objectMapper.readTree(rawJson);
+		// 	JsonNode contentNode = root.get("content");
+		// 	return objectMapper.treeToValue(contentNode, ChzzkUserResponse.class);
+		// } catch (JsonProcessingException e) {
+		// 	throw new RuntimeException("Failed to parse user info JSON", e);
+		// }
 	}
 
-	/**
-	 * POST 요청 공통 메서드
-	 */
-	private String sendPostRequest(String url, Map<String, String> requestBody) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestBody, headers);
-
-		ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-		return response.getBody();
-	}
 }

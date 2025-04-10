@@ -1,8 +1,8 @@
 package com.chzzkzzal.zzal.domain.model.factory;
 
 import com.chzzkzzal.member.domain.Member;
-import com.chzzkzzal.zzal.domain.model.entity.Zzal;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 
 // ZzalFactory.java
 public interface ZzalFactory {

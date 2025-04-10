@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chzzkzzal.core.auth.exception.RefreshTokenInvalidException;
 import com.chzzkzzal.core.auth.jwt.TokenProvider;
 import com.chzzkzzal.core.auth.jwt.TokenResult;
 import com.chzzkzzal.member.dto.TokenResponse;

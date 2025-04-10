@@ -1,6 +1,6 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
-import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
 
 public enum MultipartFileContentType {
     GIF("image/gif"),

@@ -3,8 +3,8 @@ package com.chzzkzzal.zzal.domain.model.metadata;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chzzkzzal.zzal.domain.model.entity.ZzalMetaInfo;
-import com.chzzkzzal.zzal.domain.model.entity.ZzalType;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
