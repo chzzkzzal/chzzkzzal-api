@@ -25,7 +25,15 @@ public class CustomOncePerRequestFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		authenticationFilter.doFilterInternal(request,response,filterChain);
+		if (uri.startsWith("/api/**")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		if (uri.startsWith("")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		authenticationFilter.doFilterInternal(request, response, filterChain);
 
 	}
 }
