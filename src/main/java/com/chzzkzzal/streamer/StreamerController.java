@@ -21,7 +21,6 @@ public class StreamerController {
 	public void register(@RequestBody RegisterStreamerRequest request) {
 		streamerService.register(new RegisterStreamerCommand(
 			request.channelId(),
-
 			request.channelName(),
 			request.channelImageUrl(),
 			request.followerCount()
