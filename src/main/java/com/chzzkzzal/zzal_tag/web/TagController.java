@@ -1,6 +1,8 @@
 package com.chzzkzzal.zzal_tag.web;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +34,12 @@ public class TagController {
 		@Validated @RequestBody TagRequest req) {
 		tagCmd.tagZzal(zzalId, req.getTags());
 		return ResponseEntity.created(URI.create("/api/zzals/" + zzalId)).build();
+	}
+
+	@GetMapping("/{id}/tags")
+	public ResponseEntity<List<String>> getAllTags(@PathVariable("id") Long zzalId) {
+		List<String> allTags = tagQry.getAllTags(zzalId);
+		return ResponseEntity.of(Optional.ofNullable(allTags));
 	}
 
 	@GetMapping("/search")

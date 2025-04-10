@@ -23,4 +23,6 @@ public interface ZzalHashtagRepository extends JpaRepository<ZzalHashtag, ZzalHa
 	// LIKE 기반 짤 검색 (distinct + 페이징)
 	@Query(value = "select distinct zh.zzal from ZzalHashtag zh where zh.hashtag.name like concat('%', :keyword, '%')")
 	Page<Zzal> findZzalsByHashtagKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+	List<ZzalHashtag> findAllByZzal(Zzal zzal);
 }
