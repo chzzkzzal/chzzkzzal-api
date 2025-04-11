@@ -28,7 +28,7 @@ public class ZzalUploadServiceImpl implements ZzalUploadService {
 
 	@Override
 	@Transactional
-	public Long upload(String title, Long memberId, MultipartFile multipartFile) {
+	public Long upload(Long streamerId, String title, Long memberId, MultipartFile multipartFile) {
 		Member member = memberLoader.loadMember(memberId);
 		ZzalMetaInfo metadata = metadataProvider.getMetadata(multipartFile);
 
@@ -39,7 +39,7 @@ public class ZzalUploadServiceImpl implements ZzalUploadService {
 		String fileName = s3ServicePort.uploadFile(multipartFile);
 
 		String fileUrl = s3ServicePort.getFileUrl(fileName);
-		Zzal zzal = factory.createZzal(member, metadata, title, fileUrl);
+		Zzal zzal = factory.createZzal(streamerId, member, metadata, title, fileUrl);
 		zzal = saveZzalPort.save(zzal);
 		return zzal.getId();
 

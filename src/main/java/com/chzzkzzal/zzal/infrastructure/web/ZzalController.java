@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chzzkzzal.core.auth.domain.MemberUserDetails;
 import com.chzzkzzal.core.error.CustomResponse;
 import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
 import com.chzzkzzal.zzal.domain.service.ZzalDetailService;
@@ -37,18 +35,17 @@ public class ZzalController {
 	public ResponseEntity<CustomResponse<Long>> upload(@RequestPart(value = "file") MultipartFile multipartFile,
 		@RequestPart(value = "zzalCreateRequest") ZzalCreateRequest zzalCreateRequest) {
 		Long memberId = Long.valueOf(1);
-		Long response = zzalUploadService.upload(zzalCreateRequest.title(), memberId, multipartFile);
+		Long response = zzalUploadService.upload(zzalCreateRequest.streamerId(), zzalCreateRequest.title(), memberId,
+			multipartFile);
 		return CustomResponse.okResponseEntity(response);
 	}
 
 	@GetMapping("{zzalId}")
 	public ResponseEntity<CustomResponse<ZzalDetailResponse>> viewDetail(
-		@AuthenticationPrincipal MemberUserDetails memberUserDetails,
 		@PathVariable("zzalId") Long zzalId, HttpServletRequest request) {
-		Long memberId = memberUserDetails != null ? memberUserDetails.getMember().getId() : null;
 
 		// Long memberId = Long.valueOf(1);
-		ZzalDetailResponse response = zzalDetailService.getZZal(memberId, zzalId, request);
+		ZzalDetailResponse response = zzalDetailService.getZZal(zzalId, request);
 		return CustomResponse.okResponseEntity(response);
 	}
 

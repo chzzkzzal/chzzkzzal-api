@@ -25,19 +25,21 @@ public class PicZzal extends Zzal {
 
 	private String url;
 
-	public static PicZzal create(Member member, PicInfo picInfo, String title, String url) {
+	public static PicZzal create(Long streamerId, Member member, PicInfo picInfo, String title, String url) {
 		PicZzal picZzal = new PicZzal();
+		picZzal.streamerId = streamerId;
 		picZzal.member = member;
 		picZzal.metaInfo = picInfo;
 		picZzal.title = title;
 		picZzal.url = url;
 		return picZzal;
 	}
+
 	public static PicZzal create(Member member, ZzalMetaInfo metadata, String title, String url) {
 		if (!(metadata instanceof PicInfo)) {
 			throw new IllegalArgumentException("metadata는 PicInfo의 인스턴스여야 합니다.");
 		}
-		return create(member, (PicInfo) metadata, title,url);
+		return create(member, metadata, title, url);
 	}
 
 	@Override
