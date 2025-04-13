@@ -8,5 +8,5 @@ import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 
 public interface ZzalJpaRepository extends JpaRepository<Zzal, Long> {
 
-	List<Zzal> findAllByStreamerId(Long streamerId);
+	List<Zzal> findAllByChannelId(String channelId);
 }

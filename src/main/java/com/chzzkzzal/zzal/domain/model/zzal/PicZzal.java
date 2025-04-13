@@ -25,9 +25,9 @@ public class PicZzal extends Zzal {
 
 	private String url;
 
-	public static PicZzal create(Long streamerId, Member member, PicInfo picInfo, String title, String url) {
+	public static PicZzal create(String channelId, Member member, PicInfo picInfo, String title, String url) {
 		PicZzal picZzal = new PicZzal();
-		picZzal.streamerId = streamerId;
+		picZzal.channelId = channelId;
 		picZzal.member = member;
 		picZzal.metaInfo = picInfo;
 		picZzal.title = title;

@@ -22,7 +22,7 @@ public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmar
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	protected Long streamerId;
+	protected String channelId;
 
 	protected String title;
 

@@ -1,7 +1,7 @@
 package com.chzzkzzal.zzal.infrastructure.dto;
 
 public record ZzalCreateRequest(
-	Long streamerId,
+	String channelId,
 	String title
 ) {
 

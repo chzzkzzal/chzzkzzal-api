@@ -19,7 +19,7 @@ public class StreamerService {
 	private final ZzalJpaRepository zzalJpaRepository;
 	private final MemberRepository memberRepository;
 
-	public Long register(RegisterStreamerCommand command) {
+	public String register(RegisterStreamerCommand command) {
 		Streamer streamer = Streamer.register(
 			command.channelId(),
 			command.channelName(),
@@ -27,7 +27,7 @@ public class StreamerService {
 			command.followerCount()
 		);
 		streamer = streamerRepository.save(streamer);
-		return streamer.getId();
+		return streamer.getChannelId();
 	}
 
 	public List<GetStreamerResponse> findAll() {
@@ -42,8 +42,9 @@ public class StreamerService {
 		)).collect(Collectors.toList());
 	}
 
-	public GetStreamerResponse findById(Long streamerId) {
-		Streamer streamer = streamerRepository.findById(streamerId).orElseThrow(() -> new IllegalArgumentException());
+	public GetStreamerResponse findByChannelId(String channelId) {
+		Streamer streamer = streamerRepository.findByChannelId(channelId)
+			.orElseThrow(() -> new IllegalArgumentException());
 		return new GetStreamerResponse(
 			streamer.getId(),
 			streamer.getChannelId(),
@@ -56,8 +57,8 @@ public class StreamerService {
 
 	}
 
-	public List<ZzalDetailResponse> getStreamerZzals(Long streamerId) {
-		List<Zzal> zzals = zzalJpaRepository.findAllByStreamerId(streamerId);
+	public List<ZzalDetailResponse> getStreamerZzals(String channelId) {
+		List<Zzal> zzals = zzalJpaRepository.findAllByChannelId(channelId);
 		List<ZzalDetailResponse> response = zzals.stream()
 			.map(zzal -> ZzalDetailResponse.toResponse(zzal, zzal.getMember()))
 			.collect(Collectors.toList());

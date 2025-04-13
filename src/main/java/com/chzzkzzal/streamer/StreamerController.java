@@ -22,8 +22,8 @@ public class StreamerController {
 	private final StreamerService streamerService;
 
 	@PostMapping
-	public ResponseEntity<CustomResponse<Long>> register(@RequestBody RegisterStreamerRequest request) {
-		Long response = streamerService.register(new RegisterStreamerCommand(
+	public ResponseEntity<CustomResponse<String>> register(@RequestBody RegisterStreamerRequest request) {
+		String response = streamerService.register(new RegisterStreamerCommand(
 			request.channelId(),
 			request.channelName(),
 			request.channelImageUrl(),
@@ -38,16 +38,16 @@ public class StreamerController {
 		return CustomResponse.okResponseEntity(response);
 	}
 
-	@GetMapping("/{streamerId}")
-	public ResponseEntity<CustomResponse<GetStreamerResponse>> findById(@PathVariable("streamerId") Long streamerId) {
-		GetStreamerResponse response = streamerService.findById(streamerId);
+	@GetMapping("/{channelId}")
+	public ResponseEntity<CustomResponse<GetStreamerResponse>> findById(@PathVariable("channelId") String channelId) {
+		GetStreamerResponse response = streamerService.findByChannelId(channelId);
 		return CustomResponse.okResponseEntity(response);
 	}
 
-	@GetMapping("/{streamerId}/zzals")
+	@GetMapping("/{channelId}/zzals")
 	public ResponseEntity<CustomResponse<List<ZzalDetailResponse>>> getStreamerZzals(
-		@PathVariable("streamerId") Long streamerId) {
-		List<ZzalDetailResponse> response = streamerService.getStreamerZzals(streamerId);
+		@PathVariable("channelId") String channelId) {
+		List<ZzalDetailResponse> response = streamerService.getStreamerZzals(channelId);
 		return CustomResponse.okResponseEntity(response);
 	}
 

@@ -46,7 +46,7 @@ public class ZzalController {
 
 		System.out.println("멤버 아이디 :" + memberId);
 
-		Long response = zzalUploadService.upload(zzalCreateRequest.streamerId(), zzalCreateRequest.title(), memberId,
+		Long response = zzalUploadService.upload(zzalCreateRequest.channelId(), zzalCreateRequest.title(), memberId,
 			multipartFile);
 		return CustomResponse.okResponseEntity(response);
 	}

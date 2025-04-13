@@ -30,9 +30,9 @@ public class GifZzal extends Zzal {
 
 	private String url;
 
-	public static GifZzal create(Long streamerId, Member member, GifInfo gifInfo, String title, String url) {
+	public static GifZzal create(String channelId, Member member, GifInfo gifInfo, String title, String url) {
 		GifZzal gifZzal = new GifZzal();
-		gifZzal.streamerId = streamerId;
+		gifZzal.channelId = channelId;
 		gifZzal.member = member;
 		gifZzal.metaInfo = gifInfo;
 		gifZzal.title = title; // 상위 클래스의 title 필드 설정

@@ -8,5 +8,5 @@ import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 public interface ZzalFactory {
 	boolean supports(ZzalMetaInfo metadata);
 
-	Zzal createZzal(Long streamerId, Member member, ZzalMetaInfo metadata, String title, String url);
+	Zzal createZzal(String channelId, Member member, ZzalMetaInfo metadata, String title, String url);
 }

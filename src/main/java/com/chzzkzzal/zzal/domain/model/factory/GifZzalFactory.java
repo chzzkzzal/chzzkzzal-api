@@ -16,7 +16,7 @@ public class GifZzalFactory implements ZzalFactory {
 	}
 
 	@Override
-	public Zzal createZzal(Long streamerId, Member member, ZzalMetaInfo metadata, String title, String url) {
-		return GifZzal.create(streamerId, member, (GifInfo)metadata, title, url);
+	public Zzal createZzal(String channelId, Member member, ZzalMetaInfo metadata, String title, String url) {
+		return GifZzal.create(channelId, member, (GifInfo)metadata, title, url);
 	}
 }

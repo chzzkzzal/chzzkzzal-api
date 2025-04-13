@@ -16,7 +16,7 @@ public class PicZzalFactory implements ZzalFactory {
 	}
 
 	@Override
-	public Zzal createZzal(Long streamerId, Member member, ZzalMetaInfo metadata, String title, String url) {
-		return PicZzal.create(streamerId, member, (PicInfo)metadata, title, url);
+	public Zzal createZzal(String channelId, Member member, ZzalMetaInfo metadata, String title, String url) {
+		return PicZzal.create(channelId, member, (PicInfo)metadata, title, url);
 	}
 }
