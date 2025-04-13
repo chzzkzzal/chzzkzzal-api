@@ -40,16 +40,12 @@ public class SecurityConfig {
 				// 1) H2 콘솔 전부 허용 , 근데 여기서 작용 안하는 문제 있음.
 				.requestMatchers("/h2-console/**").permitAll()
 
-				// 2) 회원가입, 로그인도 모두 허용
-				.requestMatchers(HttpMethod.POST, "/auth/signup").permitAll()
-				.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+				// 2) 회원가입/로그인 같은 요청도 permitAll
+				.requestMatchers(HttpMethod.POST, "/auth/signup", "/auth/login").permitAll()
 
-				// 3) 그 외 필요한 권한
-				.requestMatchers("/user").hasRole("USER")
-				.requestMatchers("/admin").hasRole("ADMIN")
-
-				// 4) 나머지
-				.requestMatchers("/**").permitAll()
+				// 3) 그 외 모든 요청은 일단 permitAll
+				//    (실제 인증 여부는 CustomOncePerRequestFilter가 결정)
+				.anyRequest().permitAll()
 			)
 
 			// 폼 로그인 사용 안 함
@@ -60,7 +56,6 @@ public class SecurityConfig {
 
 		return http.build();
 	}
-
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {

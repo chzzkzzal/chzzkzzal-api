@@ -2,9 +2,7 @@ package com.chzzkzzal.core.client;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
@@ -35,8 +33,8 @@ public class ChzzkAPIService {
 		return userDto;
 	}
 
-	public String getChannelInfos(List<String> channelIds){
-		String[] array = (String[])channelIds.toArray();
+	public String getChannelInfos(List<String> channelIds) {
+		String[] array = channelIds.toArray(new String[0]);
 		return chzzkApiClient.fetchChannelInfo(array);
 	}
 

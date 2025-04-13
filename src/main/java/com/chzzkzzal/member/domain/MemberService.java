@@ -18,18 +18,15 @@ public class MemberService {
 	 * 신규 회원 생성
 	 */
 	public String signin(String channelId, String channelName) {
-
 		Member member = findOrCreate(channelId, channelName);
-
-		String token = tokenProvider.createAccessToken(member.getChannelId());
-		return token;
+		return tokenProvider.createAccessToken(member.getChannelId());
 	}
 
 	public Member findOrCreate(String channelId, String channelName) {
 		return memberRepository.findByChannelId(channelId)
 			.orElseGet(() -> {
 				return createMember(channelId, channelName);
-			} );
+			});
 	}
 
 	private Member createMember(String channelId, String channelName) {
