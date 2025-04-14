@@ -19,8 +19,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TokenAuthenticationFilter implements AuthenticationFilter {
 
-	private static final String HEADER_AUTHORIZATION = "Authorization";
-	private static final String TOKEN_PREFIX = "Bearer ";
 	private final TokenProvider tokenProvider;
 
 	@Override
@@ -33,13 +31,12 @@ public class TokenAuthenticationFilter implements AuthenticationFilter {
 				if ("SESSION".equals(cookie.getName())) {
 					String sessionValue = cookie.getValue();
 					token = sessionValue;
-					System.out.println("찾았다 쿠키! : "+sessionValue);
+					System.out.println("찾았다 쿠키! : " + sessionValue);
 					// 세션 값 처리
 				}
 			}
 		}
 		System.out.println("Extracted token: " + token); // 토큰이 올바르게 추출되었는지 확인
-
 
 		if (tokenProvider.validateToken(token)) {
 			System.out.println("Token validated successfully"); // 토큰 검증 성공 확인
@@ -52,7 +49,6 @@ public class TokenAuthenticationFilter implements AuthenticationFilter {
 
 		filterChain.doFilter(request, response);
 	}
-
 
 	// private String extractAccessToken(HttpServletRequest request) {
 	// 	String authHeader = request.getHeader(HEADER_AUTHORIZATION);

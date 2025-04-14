@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface ZzalUploadService {
-	Long upload(String title, Long memberId, MultipartFile multipartFile);
+	Long upload(String channelId, String title, Long memberId, MultipartFile multipartFile);
 }
