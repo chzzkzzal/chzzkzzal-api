@@ -8,13 +8,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.chzzkzzal.core.s3.service.S3ServicePort;
 
-@Primary
+// @Primary
 @Service
 public class MockS3ServicePort implements S3ServicePort {
 
@@ -39,7 +38,7 @@ public class MockS3ServicePort implements S3ServicePort {
 
 			// 고유한 파일명 생성
 			String originalFilename = multipartFile.getOriginalFilename();
-			String uniqueFileName = UUID.randomUUID().toString() +
+			String uniqueFileName = UUID.randomUUID() +
 				(originalFilename != null ?
 					originalFilename.substring(originalFilename.lastIndexOf(".")) :
 					"");
