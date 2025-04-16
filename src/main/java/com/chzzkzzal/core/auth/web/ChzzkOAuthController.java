@@ -28,6 +28,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
+	@Value("${chzzkzzal.front}")
+	private String FRONT_DOMAIN;
+
 	@Value("${cookie.name}")
 	private String COOKIE_NAME;
 
@@ -41,10 +44,8 @@ public class ChzzkOAuthController {
 	@Value("${cookie.same_site}")
 	private String COOKIE_SAME_SITE;
 
-
 	private final ChzzkAPIService chzzkAPIService;
 	private final MemberService memberService;
-
 
 	@GetMapping("${chzzk.oauth.redirection-url}")
 	public ResponseEntity<?> callback(
@@ -70,8 +71,8 @@ public class ChzzkOAuthController {
 		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 		return ResponseEntity.status(HttpStatus.FOUND)
-			.header(HttpHeaders.SET_COOKIE,cookie.toString())
-			.location(URI.create("http://localhost:3000"))
+			.header(HttpHeaders.SET_COOKIE, cookie.toString())
+			.location(URI.create(FRONT_DOMAIN))
 			.build();
 	}
 
