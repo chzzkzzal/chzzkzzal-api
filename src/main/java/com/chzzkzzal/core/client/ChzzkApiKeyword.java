@@ -12,8 +12,10 @@ public enum ChzzkApiKeyword {
 	AUTHORIZATION("Authorization"),
 	BEARER_SPACEBAR("Bearer "),
 	CHANNEL_IDS("channelIds"),
-	CLIENT_ID("clientId"),
-	CLIENT_SECRET("clientSecret");
+	ACCESS_TOKEN_API_CLIENT_ID("clientId"),
+	ACCESS_TOKEN_API_CLIENT_SECRET("clientSecret"),
+	CLIENT_API_CLIENT_ID("Client-Id"),
+	CLIENT_API_CLIENT_SECRET("Client-Secret");
 
 	String displayName;
 

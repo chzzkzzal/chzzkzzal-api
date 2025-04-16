@@ -1,11 +1,11 @@
 package com.chzzkzzal.core.client;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.chzzkzzal.core.client.facade.ChzzkChannelInfoClient;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,11 +14,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChzzkControllerV2 {
 
-    private final ChzzkAPIService chzzkAPIService;
+	private final ChzzkAPIService chzzkAPIService;
+	private final ChzzkChannelInfoClient channelInfoClient;
 
-    
-    @GetMapping("/channels")
-    public String getChannels(@RequestParam List<String> channelIds) {
-        return chzzkAPIService.getChannelInfos(channelIds);
-    }
+	@GetMapping("/channels")
+	public String getChannels(@RequestParam String[] channelIds) {
+		return channelInfoClient.fetchChannelInfo(channelIds);
+	}
 }
