@@ -28,7 +28,7 @@ public class ChzzkUserClient {
 		return template.callApi(
 			GET, USER_INFO_URL,
 			request -> {
-				request.setHeader(AUTHORIZATION_CODE.getDisplayName(), BEARER_SPACEBAR.getDisplayName() + accessToken);
+				request.setHeader(AUTHORIZATION.getDisplayName(), BEARER_SPACEBAR.getDisplayName() + accessToken);
 			},
 			rawJson -> jsonHelper.parseContent(rawJson, ChzzkUserResponse.class)
 		);
