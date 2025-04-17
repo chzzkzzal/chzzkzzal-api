@@ -27,13 +27,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
-	@Value("${chzzkzzal.front-domain}")
+	@Value("${chzzkzzal.front}")
 	private String FRONT_DOMAIN;
 
 	@Value("${cookie.name}")
 	private String COOKIE_NAME;
 
-	@Value("${cookie.to-domain}")
+	@Value("${cookie.domain}")
 	private String COOKIE_DOMAIN;
 
 	@Value("${cookie.path}")

@@ -10,7 +10,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
-	@Value("${chzzkzzal.front-domain}")
+	@Value("${chzzkzzal.front}")
 	private String FRONT_DOMAIN;
 
 	@Bean
