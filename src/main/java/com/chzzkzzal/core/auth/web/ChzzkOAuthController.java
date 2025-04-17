@@ -27,13 +27,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
-	@Value("${chzzkzzal.front}")
+	@Value("${chzzkzzal.front.domain}")
 	private String FRONT_DOMAIN;
 
 	@Value("${cookie.name}")
 	private String COOKIE_NAME;
 
-	@Value("${cookie.domain}")
+	@Value("${cookie.to-domain}")
 	private String COOKIE_DOMAIN;
 
 	@Value("${cookie.path}")
@@ -64,7 +64,7 @@ public class ChzzkOAuthController {
 		ResponseCookie cookie = ResponseCookie.from(COOKIE_NAME, jwtToken)
 			.domain(COOKIE_DOMAIN)
 			.httpOnly(true)
-			.secure(false) // 로컬호스트에서는 false, 프로덕션에서는 true로 설정
+			.secure(true) // 로컬호스트에서는 false, 프로덕션에서는 true로 설정
 			.path(COOKIE_PATH)
 			.maxAge(Duration.ofDays(COOKIE_DAYS))
 			.sameSite(COOKIE_SAME_SITE) // CSRF 보호
