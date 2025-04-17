@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping()
+@RequestMapping
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -45,7 +45,8 @@ public class AuthController {
 		return CustomResponse.okResponseEntity(tokenResponse);
 	}
 
-	@GetMapping("/api/auth/check")
+	// Before:	@GetMapping("/api/auth/check")
+	@GetMapping("/auth/check")
 	public ResponseEntity<CustomResponse<LoginCheckResponse>> checkAuth(HttpServletRequest request) {
 		// 1. 요청에서 쿠키 추출
 		Cookie[] cookies = request.getCookies();
@@ -73,7 +74,9 @@ public class AuthController {
 	}
 
 	// 로그아웃
-	@PostMapping("/api/auth/logout")
+	// @GetMapping("/auth/logout")
+
+	@PostMapping("/auth/logout")
 	public ResponseEntity<CustomResponse<Void>> logout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		if (session != null) {

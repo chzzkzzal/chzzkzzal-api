@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/zzals")
+@RequestMapping("/zzals")
 public class TagController {
 	private final TaggingService tagCmd;
 	private final TagQueryService tagQry;

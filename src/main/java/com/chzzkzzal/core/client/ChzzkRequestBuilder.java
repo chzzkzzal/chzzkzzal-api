@@ -51,19 +51,22 @@ public final class ChzzkRequestBuilder {
 			.clientSecret(clientSecret)
 			.build();
 
-		initializeHeader(request.getHeaders());
+		initializeHeader(request.getHeaders(), clientId, clientSecret);
 		initializeBody(request.getRequestBody(), clientId, clientSecret);
 
 		return request;
 	}
 
-	private static void initializeHeader(HttpHeaders headers) {
+	private static void initializeHeader(HttpHeaders headers, String clientId, String clientSecret) {
+		headers.set(CLIENT_API_CLIENT_ID.getDisplayName(), clientId);
+		headers.set(CLIENT_API_CLIENT_SECRET.getDisplayName(), clientSecret);
+
 		headers.setContentType(MediaType.APPLICATION_JSON);
 	}
 
 	private static void initializeBody(Map<String, String> requestBody, String clientId, String clientSecret) {
-		requestBody.put(CLIENT_ID.getDisplayName(), clientId);
-		requestBody.put(CLIENT_SECRET.getDisplayName(), clientSecret);
+		requestBody.put(ACCESS_TOKEN_API_CLIENT_ID.getDisplayName(), clientId);
+		requestBody.put(ACCESS_TOKEN_API_CLIENT_SECRET.getDisplayName(), clientSecret);
 	}
 
 	public void setBody(String key, String value) {

@@ -22,6 +22,12 @@ public class StreamerController {
 	private final StreamerService streamerService;
 
 	@PostMapping
+	public ResponseEntity<CustomResponse<String>> register(@RequestBody String[] channelIds) {
+		String response = streamerService.registerByChzzkClient(channelIds);
+		return CustomResponse.okResponseEntity(response);
+	}
+
+	@PostMapping("/v2")
 	public ResponseEntity<CustomResponse<String>> register(@RequestBody RegisterStreamerRequest request) {
 		String response = streamerService.register(new RegisterStreamerCommand(
 			request.channelId(),
