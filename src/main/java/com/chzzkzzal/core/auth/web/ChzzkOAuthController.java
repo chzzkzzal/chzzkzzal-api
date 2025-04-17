@@ -27,14 +27,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
-	// @Value("${chzzkzzal.front}")
-	// private String FRONT_DOMAIN;
+	@Value("${chzzkzzal.front}")
+	private String FRONT_DOMAIN;
 
 	@Value("${cookie.name}")
 	private String COOKIE_NAME;
 
-	// @Value("${cookie.domain}")
-	// private String COOKIE_DOMAIN;
+	@Value("${cookie.domain}")
+	private String COOKIE_DOMAIN;
 
 	@Value("${cookie.path}")
 	private String COOKIE_PATH;
@@ -62,7 +62,7 @@ public class ChzzkOAuthController {
 
 		// JWT 토큰을 HTTP-only 쿠키로 설정
 		ResponseCookie cookie = ResponseCookie.from(COOKIE_NAME, jwtToken)
-			.domain("chzzkzzal.com")
+			.domain(COOKIE_DOMAIN)
 			.httpOnly(true)
 			.secure(true) // 로컬호스트에서는 false, 프로덕션에서는 true로 설정
 			.path(COOKIE_PATH)
@@ -74,7 +74,7 @@ public class ChzzkOAuthController {
 
 		return ResponseEntity.status(HttpStatus.FOUND)
 			.header(HttpHeaders.SET_COOKIE, cookie.toString())
-			.location(URI.create("http://3.35.237.38:8080"))
+			.location(URI.create(FRONT_DOMAIN))
 			.build();
 	}
 
