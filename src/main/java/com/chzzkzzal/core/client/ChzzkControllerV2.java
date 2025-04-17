@@ -11,7 +11,7 @@ import com.chzzkzzal.core.client.facade.ChzzkChannelInfoClient;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/chzzk")
+@RequestMapping("/chzzk")
 @RequiredArgsConstructor
 public class ChzzkControllerV2 {
 
