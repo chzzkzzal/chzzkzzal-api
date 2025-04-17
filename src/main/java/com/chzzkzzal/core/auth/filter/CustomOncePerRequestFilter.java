@@ -21,21 +21,22 @@ public class CustomOncePerRequestFilter extends OncePerRequestFilter {
 		FilterChain filterChain) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 
-		// 1) H2-console 요청이면 그냥 통과
+		// 1) H2-console 요청은 무조건 통과
 		if (uri.startsWith("/h2-console")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 
-		// 2) /api 등은 인증 없이 통과
-		if (uri.startsWith("/api")) {
-			filterChain.doFilter(request, response);
+		/* ------------  업로드(POST /api/zzals) 만 인증 ------------ */
+		if (uri.startsWith("/api/zzals")                     // 경로 일치
+			&& "POST".equalsIgnoreCase(request.getMethod())) {   // 메서드 일치
+			authenticationFilter.doFilterInternal(request, response, filterChain);
 			return;
 		}
 
-		// 3) '/upload'로 시작하는 요청만 인증 필터를 태움
-		if (uri.startsWith("/zzals")) {
-			authenticationFilter.doFilterInternal(request, response, filterChain);
+		/* ------------- 그 외 /api 는 허용 ----------------------- */
+		if (uri.startsWith("/api")) {
+			filterChain.doFilter(request, response);
 			return;
 		}
 
