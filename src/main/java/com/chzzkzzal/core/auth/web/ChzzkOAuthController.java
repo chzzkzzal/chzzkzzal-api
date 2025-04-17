@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping
 public class ChzzkOAuthController {
-	@Value("${chzzkzzal.front.domain}")
+	@Value("${chzzkzzal.front-domain}")
 	private String FRONT_DOMAIN;
 
 	@Value("${cookie.name}")
