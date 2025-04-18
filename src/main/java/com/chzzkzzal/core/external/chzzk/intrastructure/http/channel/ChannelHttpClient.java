@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.chzzkzzal.core.external.chzzk.application.port.ChzzkChannelPort;
 import com.chzzkzzal.core.external.chzzk.domain.model.ChannelInfo;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkClientCallbackTemplate;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkJsonMapper;
@@ -14,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ChannelHttpClient {
+public class ChannelHttpClient implements ChzzkChannelPort {
 	private static final String CHANNEL_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/channels";
 	private final ChzzkClientCallbackTemplate template;
 	private final ChzzkJsonMapper jsonHelper;

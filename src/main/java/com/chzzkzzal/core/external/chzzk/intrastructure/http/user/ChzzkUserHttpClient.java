@@ -5,6 +5,7 @@ import static org.springframework.http.HttpMethod.*;
 
 import org.springframework.stereotype.Component;
 
+import com.chzzkzzal.core.external.chzzk.application.port.ChzzkUserPort;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkClientCallbackTemplate;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkJsonMapper;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UserHttpClient {
+public class ChzzkUserHttpClient implements ChzzkUserPort {
 
 	private static final String USER_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/users/me";
 	private final ChzzkClientCallbackTemplate template;

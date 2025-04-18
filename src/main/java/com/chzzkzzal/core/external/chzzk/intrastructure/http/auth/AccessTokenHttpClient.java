@@ -5,6 +5,7 @@ import static org.springframework.http.HttpMethod.*;
 
 import org.springframework.stereotype.Component;
 
+import com.chzzkzzal.core.external.chzzk.application.port.ChzzkAuthPort;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkClientCallbackTemplate;
 import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkJsonMapper;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AccessTokenHttpClient {
+public class AccessTokenHttpClient implements ChzzkAuthPort {
 
 	private static final String TOKEN_URL = "https://openapi.chzzk.naver.com/auth/v1/token";
 	private final ChzzkClientCallbackTemplate template;

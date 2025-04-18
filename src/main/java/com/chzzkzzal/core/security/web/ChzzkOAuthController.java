@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.AccessTokenHttpClient;
 import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.RevokeTokenHttpClient;
-import com.chzzkzzal.core.external.chzzk.intrastructure.http.user.UserHttpClient;
+import com.chzzkzzal.core.external.chzzk.intrastructure.http.user.ChzzkUserHttpClient;
 import com.chzzkzzal.member.domain.MemberService;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
@@ -48,7 +48,7 @@ public class ChzzkOAuthController {
 	private String COOKIE_SAME_SITE;
 
 	private final AccessTokenHttpClient accessTokenHttpClient;
-	private final UserHttpClient userHttpClient;
+	private final ChzzkUserHttpClient userHttpClient;
 	private final RevokeTokenHttpClient revokeTokenHttpClient;
 	private final MemberService memberService;
 
