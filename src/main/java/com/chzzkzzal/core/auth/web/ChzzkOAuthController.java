@@ -20,12 +20,16 @@ import com.chzzkzzal.member.domain.MemberService;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping
+@Tag(name = "치지직 Auth API", description = "### 치치직 애플리케이션 API 사용 : "
+	+ "https://developers.chzzk.naver.com/application")
 public class ChzzkOAuthController {
 	@Value("${chzzkzzal.front}")
 	private String FRONT_DOMAIN;
@@ -48,6 +52,15 @@ public class ChzzkOAuthController {
 	private final ChzzkRevokeClient chzzkRevokeClient;
 	private final MemberService memberService;
 
+	@Operation(
+		summary = "치지직 AccessToken 발급 및 로그인",
+		description =
+			"### 로그인 프로세스\n" +
+				"1. 유저가 치지직 동의화면 모달창으로부터 동의하기 누르면 치지직 애플리케이션에 등록한 redirectUrl로 code, state와 함께 리다이렉트\n" +
+				"2. 백엔드에서 code, state 정보로 AccessToken 발급\n" +
+				"3. 첫 로그인시 회원가입 동작\n" +
+				"4. 프론트 홈화면으로 리다이렉트 및 JWT 토큰 발급"
+	)
 	@GetMapping("${chzzk.oauth.redirection-url}")
 	public ResponseEntity<?> callback(
 		@RequestParam("code") String code,

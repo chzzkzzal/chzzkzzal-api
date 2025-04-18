@@ -8,8 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chzzkzzal.zzal.domain.model.metadata.MetadataProvider;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "MediaFileController", description = "테스트용")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mediaFile")

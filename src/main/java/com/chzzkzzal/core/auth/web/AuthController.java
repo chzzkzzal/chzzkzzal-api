@@ -12,6 +12,8 @@ import com.chzzkzzal.core.error.CustomResponse;
 import com.chzzkzzal.member.domain.RefreshTokenService;
 import com.chzzkzzal.member.dto.RefreshTokenRequest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Tag(name = "인증 API", description = "")
 @Slf4j
 @RestController
 @RequestMapping
@@ -28,9 +31,10 @@ public class AuthController {
 	private final RefreshTokenService RefreshTokenService;
 	private final TokenProvider tokenProvider;
 
-	/**
-	 * Refresh Token 이용하여 새 Access Token 발급
-	 */
+	@Operation(
+		summary = "(개발중) 리프레쉬 토큰 발급",
+		description = ""
+	)
 	@PostMapping("/refresh")
 	public ResponseEntity<CustomResponse<String>> refresh(@RequestBody RefreshTokenRequest request) {
 		// 1) 서비스 호출
@@ -45,7 +49,10 @@ public class AuthController {
 		return CustomResponse.okResponseEntity(tokenResponse);
 	}
 
-	// Before:	@GetMapping("/api/auth/check")
+	@Operation(
+		summary = "로그인 체크",
+		description = "### 로그인 했는지 체크한다.(By http-only) \n"
+	)
 	@GetMapping("/auth/check")
 	public ResponseEntity<CustomResponse<LoginCheckResponse>> checkAuth(HttpServletRequest request) {
 		// 1. 요청에서 쿠키 추출
@@ -73,9 +80,9 @@ public class AuthController {
 		return CustomResponse.okResponseEntity(response);
 	}
 
-	// 로그아웃
-	// @GetMapping("/auth/logout")
-
+	@Operation(
+		summary = "쿠키제거로 로그아웃 (By http-only)", description = ""
+	)
 	@PostMapping("/auth/logout")
 	public ResponseEntity<CustomResponse<Void>> logout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
