@@ -2,7 +2,7 @@ package com.chzzkzzal.member.domain;
 
 import java.time.LocalDateTime;
 
-import com.chzzkzzal.core.domain.BaseTimeEntity;
+import com.chzzkzzal.core.common.domain.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,6 @@ public class Member extends BaseTimeEntity {
 
 	private String channelName;
 	private String channelId;
-
 
 	public Member(LocalDateTime createdAt, LocalDateTime updatedAt, Long id, String channelName, String channelId) {
 		super(createdAt, updatedAt);
