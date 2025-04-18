@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.chzzkzzal.core.storage.s3.domain.S3Repository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,9 +39,5 @@ public class S3RepositoryImpl implements S3Repository {
 	public void deleteObject(String key) {
 		amazonS3.deleteObject(new DeleteObjectRequest(bucket, key));
 	}
-
-	@Override
-	public ObjectMetadata getObjectMetadata(String key) {
-		return amazonS3.getObjectMetadata(bucket, key);
-	}
+	
 }

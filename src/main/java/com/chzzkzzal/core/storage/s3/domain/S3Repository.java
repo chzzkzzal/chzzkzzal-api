@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.storage.s3.infratructure.repository;
+package com.chzzkzzal.core.storage.s3.domain;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -12,5 +12,4 @@ public interface S3Repository {
 
 	void deleteObject(String key);
 
-	ObjectMetadata getObjectMetadata(String key);
 }

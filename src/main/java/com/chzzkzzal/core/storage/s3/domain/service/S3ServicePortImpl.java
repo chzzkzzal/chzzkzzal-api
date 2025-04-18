@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.storage.s3.application;
+package com.chzzkzzal.core.storage.s3.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,15 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.chzzkzzal.core.storage.s3.application.S3ServicePort;
 import com.chzzkzzal.core.storage.s3.infratructure.internal.S3Deleter;
 import com.chzzkzzal.core.storage.s3.infratructure.internal.S3Uploader;
 import com.chzzkzzal.core.storage.s3.infratructure.internal.S3UrlProvider;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Primary
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class S3ServicePortImpl implements S3ServicePort {
 

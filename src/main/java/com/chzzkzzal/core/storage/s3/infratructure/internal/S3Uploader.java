@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.chzzkzzal.core.storage.s3.domain.FileNameGenerator;
-import com.chzzkzzal.core.storage.s3.infratructure.repository.S3Repository;
+import com.chzzkzzal.core.storage.s3.domain.S3Repository;
 import com.chzzkzzal.zzal.domain.model.metadata.FileValidator;
 
 import lombok.RequiredArgsConstructor;

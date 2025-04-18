@@ -2,7 +2,7 @@ package com.chzzkzzal.core.storage.s3.infratructure.internal;
 
 import org.springframework.stereotype.Component;
 
-import com.chzzkzzal.core.storage.s3.infratructure.repository.S3Repository;
+import com.chzzkzzal.core.storage.s3.domain.S3Repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
