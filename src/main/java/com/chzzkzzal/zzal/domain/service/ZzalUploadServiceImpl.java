@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chzzkzzal.core.s3.service.S3ServicePort;
+import com.chzzkzzal.core.storage.s3.application.S3ServicePort;
 import com.chzzkzzal.member.domain.Member;
 import com.chzzkzzal.member.domain.MemberLoader;
 import com.chzzkzzal.zzal.domain.dao.SaveZzalPort;

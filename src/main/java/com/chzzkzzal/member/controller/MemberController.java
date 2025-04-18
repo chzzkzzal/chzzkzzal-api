@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.core.auth.domain.MemberUserDetails;
+import com.chzzkzzal.core.security.domain.MemberUserDetails;
 import com.chzzkzzal.member.domain.MemberService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;

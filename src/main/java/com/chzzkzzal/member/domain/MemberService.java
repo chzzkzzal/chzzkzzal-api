@@ -3,7 +3,7 @@ package com.chzzkzzal.member.domain;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.auth.jwt.TokenProvider;
+import com.chzzkzzal.core.security.infrastructure.jwt.TokenProvider;
 
 import lombok.RequiredArgsConstructor;
 

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.client.facade.ChannelData;
-import com.chzzkzzal.core.client.facade.ChzzkChannelInfoClient;
+import com.chzzkzzal.core.external.chzzk.domain.model.ChannelInfo;
+import com.chzzkzzal.core.external.chzzk.intrastructure.http.channel.ChzzkChannelInfoClient;
 import com.chzzkzzal.member.domain.MemberRepository;
 import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
@@ -34,7 +34,7 @@ public class StreamerService {
 	}
 
 	public String registerByChzzkClient(String[] channelIds) {
-		ChannelData response = chzzkChannelInfoClient.fetchChannelInfo(channelIds);
+		ChannelInfo response = chzzkChannelInfoClient.fetchChannelInfo(channelIds);
 		Streamer streamer = new Streamer(response.channelId(), response.channelName(), response.channelImageUrl(),
 			response.followerCount());
 		streamer = streamerRepository.save(streamer);

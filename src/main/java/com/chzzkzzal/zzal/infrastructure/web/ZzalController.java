@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.chzzkzzal.core.auth.domain.MemberUserDetails;
-import com.chzzkzzal.core.error.CustomResponse;
+import com.chzzkzzal.core.common.error.CustomResponse;
+import com.chzzkzzal.core.security.domain.MemberUserDetails;
 import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
 import com.chzzkzzal.zzal.domain.service.ZzalDetailService;
 import com.chzzkzzal.zzal.domain.service.ZzalGetAllService;
