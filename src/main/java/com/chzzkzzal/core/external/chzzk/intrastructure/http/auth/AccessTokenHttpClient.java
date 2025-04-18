@@ -6,8 +6,9 @@ import static org.springframework.http.HttpMethod.*;
 import org.springframework.stereotype.Component;
 
 import com.chzzkzzal.core.external.chzzk.application.port.ChzzkAuthPort;
-import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkClientCallbackTemplate;
-import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkJsonMapper;
+import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkHttpRequest;
+import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkHttpRequestFactory;
+import com.chzzkzzal.core.external.chzzk.intrastructure.core.ChzzkRestExecutor;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -17,23 +18,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class AccessTokenHttpClient implements ChzzkAuthPort {
-
 	private static final String TOKEN_URL = "https://openapi.chzzk.naver.com/auth/v1/token";
-	private final ChzzkClientCallbackTemplate template;
-	private final ChzzkJsonMapper jsonHelper;
+	private final ChzzkHttpRequestFactory factory;
+	private final ChzzkRestExecutor exec;
 
-	/**
-	 * 액세스 토큰 발급 (콜백으로 구체 로직 정의)
-	 */
-	public ChzzkTokenResponse fetchAccessToken(String code, String state) {
-		return template.callApi(
-			POST, TOKEN_URL,
-			request -> {
-				request.setBody(GRANT_TYPE.getDisplayName(), AUTHORIZATION_CODE.getDisplayName());
-				request.setBody(CODE.getDisplayName(), code);
-				request.setBody(STATE.getDisplayName(), state);
-			},
-			rawJson -> jsonHelper.parseContent(rawJson, ChzzkTokenResponse.class)
-		);
+	@Override
+	public ChzzkTokenResponse getAccessToken(String code, String state) {
+		ChzzkHttpRequest req = factory.base(POST, TOKEN_URL)
+			.addBody(GRANT_TYPE.getDisplayName(), AUTHORIZATION_CODE.getDisplayName())
+			.addBody(CODE.getDisplayName(), code)
+			.addBody(STATE.getDisplayName(), state);
+
+		return exec.exchange(req, ChzzkTokenResponse.class);
 	}
 }

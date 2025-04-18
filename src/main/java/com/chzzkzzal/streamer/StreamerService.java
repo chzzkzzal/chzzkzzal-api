@@ -34,7 +34,7 @@ public class StreamerService {
 	}
 
 	public String registerByChzzkClient(String[] channelIds) {
-		ChannelInfo response = channelHttpClient.fetchChannelInfo(channelIds);
+		ChannelInfo response = channelHttpClient.findByIds(channelIds);
 		Streamer streamer = new Streamer(response.channelId(), response.channelName(), response.channelImageUrl(),
 			response.followerCount());
 		streamer = streamerRepository.save(streamer);
