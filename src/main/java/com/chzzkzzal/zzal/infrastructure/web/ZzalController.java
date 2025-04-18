@@ -23,9 +23,12 @@ import com.chzzkzzal.zzal.domain.service.ZzalGetAllService;
 import com.chzzkzzal.zzal.domain.service.ZzalUploadService;
 import com.chzzkzzal.zzal.infrastructure.dto.ZzalCreateRequest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "짤 API", description = "")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/zzals")
@@ -35,6 +38,15 @@ public class ZzalController {
 	private final ZzalDetailService zzalDetailService;
 	private final ZzalGetAllService zzalGetAllService;
 
+	@Operation(
+		summary = "짤 업로드(파일1개)",
+		description =
+			"### 짤 업로드\n" +
+				"- 파일은 1개만 가능(용량 제한 있음) \n" +
+				"### TODO\n" +
+				"- 파일업로드는 별도 api로 분리 \n" +
+				"- Body @Validation 추가"
+	)
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CustomResponse<Long>> upload(@RequestPart(value = "file") MultipartFile multipartFile,
 		@RequestPart(value = "zzalCreateRequest") ZzalCreateRequest zzalCreateRequest,
@@ -61,6 +73,12 @@ public class ZzalController {
 		}
 	}
 
+	@Operation(
+		summary = "짤 단건 조회",
+		description =
+			"### 짤 단건 조회\n" +
+				"- 짤 메타정보 포함 \n"
+	)
 	@GetMapping("{zzalId}")
 	public ResponseEntity<CustomResponse<ZzalDetailResponse>> viewDetail(
 		@PathVariable("zzalId") Long zzalId, HttpServletRequest request) {
@@ -70,6 +88,14 @@ public class ZzalController {
 		return CustomResponse.okResponseEntity(response);
 	}
 
+	@Operation(
+		summary = "짤 전체 조회",
+		description =
+			"### 짤 전체 조회\n" +
+				"- findAll \n" +
+				"### TODO \n" +
+				"- 커서기반 리팩토링 \n"
+	)
 	@GetMapping
 	public ResponseEntity<CustomResponse<List<ZzalDetailResponse>>> getAll() {
 		List<ZzalDetailResponse> responses = zzalGetAllService.getAll();

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chzzkzzal.core.error.CustomResponse;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "(미구현) 짤 로그 API", description = "")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/log")
