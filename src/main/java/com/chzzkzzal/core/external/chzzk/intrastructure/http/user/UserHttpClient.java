@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ChzzkUserClient {
+public class UserHttpClient {
 
 	private static final String USER_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/users/me";
 	private final ChzzkClientCallbackTemplate template;

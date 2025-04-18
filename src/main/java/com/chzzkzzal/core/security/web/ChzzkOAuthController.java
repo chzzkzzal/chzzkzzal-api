@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.ChzzkRevokeClient;
-import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.ChzzkTokenClient;
-import com.chzzkzzal.core.external.chzzk.intrastructure.http.user.ChzzkUserClient;
+import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.AccessTokenHttpClient;
+import com.chzzkzzal.core.external.chzzk.intrastructure.http.auth.RevokeTokenHttpClient;
+import com.chzzkzzal.core.external.chzzk.intrastructure.http.user.UserHttpClient;
 import com.chzzkzzal.member.domain.MemberService;
 import com.chzzkzzal.member.dto.ChzzkTokenResponse;
 import com.chzzkzzal.member.dto.ChzzkUserResponse;
@@ -47,9 +47,9 @@ public class ChzzkOAuthController {
 	@Value("${cookie.same_site}")
 	private String COOKIE_SAME_SITE;
 
-	private final ChzzkTokenClient chzzkTokenClient;
-	private final ChzzkUserClient chzzkUserClient;
-	private final ChzzkRevokeClient chzzkRevokeClient;
+	private final AccessTokenHttpClient accessTokenHttpClient;
+	private final UserHttpClient userHttpClient;
+	private final RevokeTokenHttpClient revokeTokenHttpClient;
 	private final MemberService memberService;
 
 	@Operation(
@@ -67,9 +67,9 @@ public class ChzzkOAuthController {
 		@RequestParam("state") String state,
 		HttpServletResponse response
 	) {
-		ChzzkTokenResponse tokenResponse = chzzkTokenClient.fetchAccessToken(code, state);
+		ChzzkTokenResponse tokenResponse = accessTokenHttpClient.fetchAccessToken(code, state);
 		String accessToken = tokenResponse.accessToken();
-		ChzzkUserResponse userInfo = chzzkUserClient.fetchUserInfo(accessToken);
+		ChzzkUserResponse userInfo = userHttpClient.fetchUserInfo(accessToken);
 
 		String jwtToken = memberService.signin(userInfo.channelId(), userInfo.channelName());
 

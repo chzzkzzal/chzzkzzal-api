@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ChzzkRevokeClient {
+public class RevokeTokenHttpClient {
 
 	private static final String CHANNEL_INFO_URL = "https://openapi.chzzk.naver.com/open/v1/channels";
 	private final ChzzkClientCallbackTemplate template;

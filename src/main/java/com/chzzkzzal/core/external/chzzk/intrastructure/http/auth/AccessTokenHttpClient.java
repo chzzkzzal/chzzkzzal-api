@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ChzzkTokenClient {
+public class AccessTokenHttpClient {
 
 	private static final String TOKEN_URL = "https://openapi.chzzk.naver.com/auth/v1/token";
 	private final ChzzkClientCallbackTemplate template;
