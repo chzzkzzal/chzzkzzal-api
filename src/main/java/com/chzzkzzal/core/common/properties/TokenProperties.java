@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.security.properties;
+package com.chzzkzzal.core.common.properties;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.chzzkzzal.core.storage.properties.S3Properties;
+import com.chzzkzzal.core.common.properties.S3Properties;
 import com.chzzkzzal.core.storage.s3.domain.S3Repository;
 
 import lombok.RequiredArgsConstructor;

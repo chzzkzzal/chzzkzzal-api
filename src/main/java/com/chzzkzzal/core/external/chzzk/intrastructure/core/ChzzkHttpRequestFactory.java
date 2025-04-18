@@ -5,7 +5,7 @@ import static com.chzzkzzal.core.external.chzzk.domain.ChzzkApiFields.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import com.chzzkzzal.core.external.properties.ChzzkProperties;
+import com.chzzkzzal.core.common.properties.ChzzkProperties;
 
 import lombok.RequiredArgsConstructor;
 
