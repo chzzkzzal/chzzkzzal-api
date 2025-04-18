@@ -67,9 +67,9 @@ public class ChzzkOAuthController {
 		@RequestParam("state") String state,
 		HttpServletResponse response
 	) {
-		ChzzkTokenResponse tokenResponse = accessTokenHttpClient.fetchAccessToken(code, state);
+		ChzzkTokenResponse tokenResponse = accessTokenHttpClient.getAccessToken(code, state);
 		String accessToken = tokenResponse.accessToken();
-		ChzzkUserResponse userInfo = userHttpClient.fetchUserInfo(accessToken);
+		ChzzkUserResponse userInfo = userHttpClient.me(accessToken);
 
 		String jwtToken = memberService.signin(userInfo.channelId(), userInfo.channelName());
 

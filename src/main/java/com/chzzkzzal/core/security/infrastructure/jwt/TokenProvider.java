@@ -10,8 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.chzzkzzal.core.common.properties.TokenProperties;
 import com.chzzkzzal.core.security.domain.MemberUserDetailService;
-import com.chzzkzzal.core.security.properties.TokenProperties;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

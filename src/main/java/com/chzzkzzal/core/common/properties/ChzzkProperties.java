@@ -1,4 +1,4 @@
-package com.chzzkzzal.core.external.properties;
+package com.chzzkzzal.core.common.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
