@@ -3,7 +3,7 @@ package com.chzzkzzal.member.domain;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.chzzkzzal.core.jwt.JwtProvider;
+import com.chzzkzzal.core.security.infrastructure.jwt.TokenProvider;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,22 +11,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
 	private final MemberRepository memberRepository;
-	private final JwtProvider jwtProvider;
+	private final TokenProvider tokenProvider;
 	private final PasswordEncoder passwordEncoder;
 
 	/**
 	 * 신규 회원 생성
 	 */
 	public String signin(String channelId, String channelName) {
-
 		Member member = findOrCreate(channelId, channelName);
-
-		String token = jwtProvider.createAccessToken(member.getChannelId());
-		return token;
+		return tokenProvider.createAccessToken(member.getChannelId());
 	}
 
 	public Member findOrCreate(String channelId, String channelName) {
-
 		return memberRepository.findByChannelId(channelId)
 			.orElseGet(() -> {
 				return createMember(channelId, channelName);
@@ -34,11 +30,9 @@ public class MemberService {
 	}
 
 	private Member createMember(String channelId, String channelName) {
-		String encryptedPassword = passwordEncoder.encode(channelId);
 
 		Member member = Member.builder()
 			.channelId(channelId)
-			.password(encryptedPassword)
 			.channelName(channelName)
 			.build();
 
