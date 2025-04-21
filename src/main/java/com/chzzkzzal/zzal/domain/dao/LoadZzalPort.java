@@ -3,7 +3,7 @@ package com.chzzkzzal.zzal.domain.dao;
 import java.util.List;
 import java.util.Optional;
 
-import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.zzal.Zzal;
 
 public interface LoadZzalPort {
 	Optional<Zzal> findById(Long id); // 조회 기능

@@ -1,13 +1,9 @@
 package com.chzzkzzal.zzal;
 
-import static com.chzzkzzal.zzal.domain.service.ZzalDetailServiceImpl.*;
-
 import java.time.LocalDateTime;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.event.TransactionPhase;
-import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.chzzkzzal.myviewhistory.MyViewHistoryService;
 import com.chzzkzzal.zzal_view_log.ZzalViewLogDto;
@@ -30,7 +26,7 @@ public class ZzalViewedEventHandler {
 	// 	classes = ZzalViewedEvent.class,
 	// 	phase = TransactionPhase.AFTER_COMMIT
 	// )
-	public void handle(ZzalViewedEvent event){
+	public void handle(ZzalViewedEvent event) {
 		Long zzalId = event.zzalId();
 		HttpServletRequest request = event.httpServletRequest();
 		Long memberId = event.memberId();
@@ -40,6 +36,7 @@ public class ZzalViewedEventHandler {
 			myViewHistoryService.addMemberViewHistory(zzalId, memberId);
 		}
 	}
+
 	private static ZzalViewLogDto getZzalViewLogDto(Long memberId, Long zzalId, ZzalHits zzalHits) {
 		return new ZzalViewLogDto(
 			zzalId, memberId, zzalHits.getUniqueIdentifier(), zzalHits.getIpAddress(), zzalHits.getUserAgent(),
