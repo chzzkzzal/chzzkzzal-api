@@ -15,22 +15,35 @@ import com.chzzkzzal.zzal.exception.metadata.MetadataUnsupportedFormatException;
 @Component
 public class PicMetadataExtractor implements MetadataExtractor {
 
+	@Override
 	public PicInfo extract(MultipartFile file) {
-		byte[] fileBytes = new byte[0];
+		byte[] fileBytes = readFileBytes(file);
+		BufferedImage image = readImage(fileBytes);
+
+		return new PicInfo(
+			file.getSize(),
+			image.getWidth(),
+			image.getHeight(),
+			file.getContentType(),
+			file.getOriginalFilename()
+		);
+	}
+
+	private byte[] readFileBytes(MultipartFile file) {
 		try {
-			fileBytes = file.getBytes();
+			return file.getBytes();
 		} catch (IOException e) {
 			throw new MetadataIOException(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(fileBytes)) {
+	}
+
+	private BufferedImage readImage(byte[] bytes) {
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes)) {
 			BufferedImage image = ImageIO.read(bais);
 			if (image == null) {
 				throw new MetadataUnsupportedFormatException();
 			}
-			int width = image.getWidth();
-			int height = image.getHeight();
-
-			return new PicInfo(file.getSize(), width, height, file.getContentType(), file.getOriginalFilename());
+			return image;
 		} catch (IOException e) {
 			throw new MetadataIOException(e);
 		}
