@@ -6,8 +6,8 @@ public class MetadataUnsupportedFormatException extends GlobalException {
 
 	public MetadataUnsupportedFormatException() {
 		super(
-			MetadataExceptionCode.METADATA_UNSUPPORTED_FORMAT.getMessage(),
-			MetadataExceptionCode.METADATA_UNSUPPORTED_FORMAT
+			MetadataExceptionCode.METADATA_UNSUPPORTED_EXTENSION.getMessage(),
+			MetadataExceptionCode.METADATA_UNSUPPORTED_EXTENSION
 		);
 	}
 }
