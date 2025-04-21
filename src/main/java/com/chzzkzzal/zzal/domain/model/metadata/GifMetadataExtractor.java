@@ -3,65 +3,62 @@ package com.chzzkzzal.zzal.domain.model.metadata;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Iterator;
+
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.metadata.IIOMetadataNode;
-import javax.imageio.stream.ImageInputStream;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
+import com.chzzkzzal.zzal.exception.metadata.MetadataIOException;
+import com.chzzkzzal.zzal.exception.metadata.MetadataUnsupportedFormatException;
+
+import lombok.RequiredArgsConstructor;
+
 @Component
-public class GifMetadataExtractor implements MetadataExtractor {
+@RequiredArgsConstructor
+public class GifMetadataExtractor extends AbstractMetadataExtractor<GifInfo> {
 
-    @Override
-    public GifInfo extract(MultipartFile file) {
-        byte[] fileBytes = getFileBytes(file);
+	private final GifFrameAnalyzer frameAnalyzer;
+	private final GifDurationCalculator durationCalculator;
 
-        try (ByteArrayInputStream metadataStream = new ByteArrayInputStream(fileBytes);
-             ImageInputStream imageInputStream = ImageIO.createImageInputStream(metadataStream)) {
+	@Override
+	public boolean supports(ZzalType type) {
+		return type == ZzalType.GIF;
+	}
 
-            Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("gif");
-            if (!readers.hasNext()) {
-                throw new IllegalArgumentException("GIF 파일을 읽을 수 없습니다.");
-            }
-            ImageReader reader = readers.next();
-            reader.setInput(imageInputStream);
+	@Override
+	protected GifInfo parseMetadata(byte[] bytes, MultipartFile file) {
+		try {
+			ImageReader reader = new ImageReader(bytes);
 
-            int numFrames = reader.getNumImages(true);
-            int totalDelay = 0;
-            for (int i = 0; i < numFrames; i++) {
-                IIOMetadata metadata = reader.getImageMetadata(i);
-                IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree("javax_imageio_gif_image_1.0");
-                IIOMetadataNode gce = (IIOMetadataNode) root.getElementsByTagName("GraphicControlExtension").item(0);
-                if (gce != null) {
-                    String delayTime = gce.getAttribute("delayTime");
-                    int delay = Integer.parseInt(delayTime);
-                    totalDelay += delay;
-                }
-            }
-            double totalSeconds = (totalDelay * 10) / 1000.0;
+			int frames = frameAnalyzer.countFrames(reader);
+			double seconds = durationCalculator.calculateTotalDuration(reader, frames);
+			BufferedImage firstFrame = readFirstFrame(bytes);
 
-            // 새로운 스트림을 사용하여 이미지 크기를 추출 (스트림 재사용 문제 해결)
-            BufferedImage image = ImageIO.read(new ByteArrayInputStream(fileBytes));
-            if (image == null) {
-                throw new IllegalArgumentException("이미지 파일을 읽을 수 없습니다.");
-            }
-            int width = image.getWidth();
-            int height = image.getHeight();
-            return new GifInfo(file.getSize(), width, height, numFrames, totalSeconds, file.getContentType(), file.getOriginalFilename());
+			return new GifInfo(
+				file.getSize(),
+				firstFrame.getWidth(),
+				firstFrame.getHeight(),
+				frames,
+				seconds,
+				file.getContentType(),
+				file.getOriginalFilename()
+			);
+		} catch (IOException e) {
+			throw new MetadataIOException(e);
+		}
+	}
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private byte[] getFileBytes(MultipartFile file) {
-        try {
-            return file.getBytes();
-        } catch (IOException e) {
-            throw new RuntimeException("파일을 읽어들일 수 없습니다.", e);
-        }
-    }
+	private BufferedImage readFirstFrame(byte[] bytes) {
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes)) {
+			BufferedImage img = ImageIO.read(bais);
+			if (img == null) {
+				throw new MetadataUnsupportedFormatException();
+			}
+			return img;
+		} catch (IOException e) {
+			throw new MetadataIOException(e);
+		}
+	}
 }

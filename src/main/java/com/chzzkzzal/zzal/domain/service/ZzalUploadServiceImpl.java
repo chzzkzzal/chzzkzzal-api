@@ -14,6 +14,7 @@ import com.chzzkzzal.zzal.domain.model.factory.ZzalFactory;
 import com.chzzkzzal.zzal.domain.model.metadata.MetadataProvider;
 import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
+import com.chzzkzzal.zzal.exception.zzal.ZzalNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +36,7 @@ public class ZzalUploadServiceImpl implements ZzalUploadService {
 		ZzalFactory factory = zzalFactories.stream()
 			.filter(f -> f.supports(metadata))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("지원되지 않는 Zzal 유형입니다."));
+			.orElseThrow(() -> new ZzalNotFoundException());
 		String fileName = s3ServicePort.uploadFile(multipartFile);
 
 		String fileUrl = s3ServicePort.getFileUrl(fileName);

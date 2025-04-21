@@ -1,43 +1,50 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
+import com.chzzkzzal.zzal.exception.metadata.MetadataUnsupportedFormatException;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum MultipartFileContentType {
-    GIF("image/gif"),
-    JPEG("image/jpeg"),
-    JPG("image/jpg"),
-    PNG("image/png"),
-    SVG("image/svg+xml");
+	GIF("image/gif"),
+	JPEG("image/jpeg"), JPG("image/jpg"), PNG("image/png"), SVG("image/svg+xml"),
+	;
 
-    private final String type;
+	private final String type;
 
-    MultipartFileContentType(String type) {
-        this.type = type;
-    }
+	private static final Map<String, MultipartFileContentType> TYPE_MAP = new HashMap<>();
 
-    public String getType() {
-        return type;
-    }
+	static {
+		for (MultipartFileContentType type : MultipartFileContentType.values()) {
+			TYPE_MAP.put(type.getType().toLowerCase(), type);
+		}
+	}
 
-    public static MultipartFileContentType fromString(String contentType) {
-        for (MultipartFileContentType ict : values()) {
-            if (ict.getType().equalsIgnoreCase(contentType)) {
-                return ict;
-            }
-        }
-        throw new IllegalArgumentException("지원되지 않는 이미지 형식입니다: " + contentType);
-    }
-    public ZzalType toZzalType() {
-        switch (this) {
-            case GIF:
-                return ZzalType.GIF;
-            case JPEG:
-            case JPG:
-            case PNG:
-            case SVG:
-                return ZzalType.PIC;
-            default:
-                throw new IllegalArgumentException("지원되지 않는 MultipartFileContentType: " + this);
-        }
-    }
+	public static MultipartFileContentType fromString(String contentType) {
+		MultipartFileContentType result = TYPE_MAP.get(contentType.toLowerCase());
+		if (result == null) {
+			throw new MetadataUnsupportedFormatException();
+		}
+		return result;
+	}
+
+	public ZzalType toZzalType() {
+		switch (this) {
+			case GIF:
+				return ZzalType.GIF;
+			case JPEG:
+			case JPG:
+			case PNG:
+			case SVG:
+				return ZzalType.PIC;
+			default:
+				throw new MetadataUnsupportedFormatException();
+		}
+	}
 }

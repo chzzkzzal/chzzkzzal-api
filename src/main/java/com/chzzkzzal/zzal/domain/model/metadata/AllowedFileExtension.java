@@ -1,28 +1,33 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum AllowedFileExtension {
-    JPG("jpg"),
-    JPEG("jpeg"),
-    SVG("svg"),
-    PNG("png"),
-    GIF("gif");
+	GIF("gif"),
 
-    private final String extension;
+	JPG("jpg"), JPEG("jpeg"), SVG("svg"), PNG("png"),
+	;
 
-    AllowedFileExtension(String extension) {
-        this.extension = extension;
-    }
+	private final String extension;
 
-    public String getExtension() {
-        return extension;
-    }
+	private static final Map<String, AllowedFileExtension> EXTENSION_MAP = new HashMap<>();
 
-    public static boolean isAllowed(String ext) {
-        for (AllowedFileExtension allowed : values()) {
-            if (allowed.getExtension().equalsIgnoreCase(ext)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	static {
+		for (AllowedFileExtension allowed : values()) {
+			EXTENSION_MAP.put(allowed.getExtension().toLowerCase(), allowed);
+		}
+	}
+
+	public static boolean isAllowed(String ext) {
+		if (ext == null) {
+			return false;
+		}
+		return EXTENSION_MAP.containsKey(ext.toLowerCase());
+	}
 }

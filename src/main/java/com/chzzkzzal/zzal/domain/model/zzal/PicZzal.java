@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +21,11 @@ public class PicZzal extends Zzal {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
+
 	@Embedded
 	private PicInfo metaInfo;
 
+	@NotEmpty(message = "파일주소는 필수 입력 항목입니다.")
 	private String url;
 
 	public static PicZzal create(String channelId, Member member, PicInfo picInfo, String title, String url) {
