@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
 @Entity
@@ -22,8 +23,10 @@ public abstract class Zzal extends BaseTimeEntity implements Uploadable, Bookmar
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	protected String channelId;
 
+	@ValidTitle
 	protected String title;
 
 	abstract public String getUrl();
