@@ -8,7 +8,7 @@ import com.chzzkzzal.zzal.Events;
 import com.chzzkzzal.zzal.ZzalViewedEvent;
 import com.chzzkzzal.zzal.domain.dao.LoadZzalPort;
 import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
-import com.chzzkzzal.zzal.exception.ZzalNotFoundException;
+import com.chzzkzzal.zzal.exception.zzal.ZzalNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

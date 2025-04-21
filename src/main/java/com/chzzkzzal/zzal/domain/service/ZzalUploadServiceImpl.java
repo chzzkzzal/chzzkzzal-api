@@ -14,7 +14,7 @@ import com.chzzkzzal.zzal.domain.model.factory.ZzalFactory;
 import com.chzzkzzal.zzal.domain.model.metadata.MetadataProvider;
 import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
 import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
-import com.chzzkzzal.zzal.exception.ZzalNotFoundException;
+import com.chzzkzzal.zzal.exception.zzal.ZzalNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 

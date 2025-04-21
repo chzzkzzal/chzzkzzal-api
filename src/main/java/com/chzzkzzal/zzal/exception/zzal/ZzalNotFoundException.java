@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.exception;
+package com.chzzkzzal.zzal.exception.zzal;
 
 import com.chzzkzzal.core.common.error.GlobalException;
 

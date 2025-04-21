@@ -1,4 +1,4 @@
-package com.chzzkzzal.zzal.exception;
+package com.chzzkzzal.zzal.exception.zzal;
 
 import org.springframework.http.HttpStatus;
 
