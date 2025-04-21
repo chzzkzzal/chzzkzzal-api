@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.chzzkzzal.zzal.domain.dao.DeleteZzalPort;
 import com.chzzkzzal.zzal.domain.dao.LoadZzalPort;
 import com.chzzkzzal.zzal.domain.dao.SaveZzalPort;
-import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.zzal.Zzal;
 
 import lombok.RequiredArgsConstructor;
 

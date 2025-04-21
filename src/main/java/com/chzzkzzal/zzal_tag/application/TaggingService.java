@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.domain.zzal.Zzal;
 import com.chzzkzzal.zzal.infrastructure.persistence.jpa.ZzalJpaRepository;
 import com.chzzkzzal.zzal_tag.domain.model.Hashtag;
 import com.chzzkzzal.zzal_tag.domain.model.ZzalHashtag;

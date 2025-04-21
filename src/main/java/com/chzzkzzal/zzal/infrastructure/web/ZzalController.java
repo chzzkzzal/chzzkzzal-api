@@ -17,11 +17,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.chzzkzzal.core.common.error.CustomResponse;
 import com.chzzkzzal.core.security.domain.MemberUserDetails;
-import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
-import com.chzzkzzal.zzal.domain.service.ZzalDetailService;
-import com.chzzkzzal.zzal.domain.service.ZzalGetAllService;
-import com.chzzkzzal.zzal.domain.service.ZzalUploadService;
 import com.chzzkzzal.zzal.infrastructure.dto.ZzalCreateRequest;
+import com.chzzkzzal.zzal.service.ZzalDetailResponse;
+import com.chzzkzzal.zzal.service.ZzalDetailService;
+import com.chzzkzzal.zzal.service.ZzalGetAllService;
+import com.chzzkzzal.zzal.service.ZzalUploadService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

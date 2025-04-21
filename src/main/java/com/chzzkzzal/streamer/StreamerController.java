@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chzzkzzal.core.common.error.CustomResponse;
-import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
+import com.chzzkzzal.zzal.service.ZzalDetailResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
