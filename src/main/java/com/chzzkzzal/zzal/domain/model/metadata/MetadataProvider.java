@@ -5,6 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chzzkzzal.zzal.domain.model.zzal.ZzalMetaInfo;
 import com.chzzkzzal.zzal.domain.model.zzal.ZzalType;
+import com.chzzkzzal.zzal.exception.metadata.MetadataContentTypeNullException;
+import com.chzzkzzal.zzal.exception.metadata.MetadataExtractionFailedException;
+import com.chzzkzzal.zzal.exception.metadata.MetadataUnsupportedFormatException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class MetadataProvider<T> {
+public class MetadataProvider {
 
 	private final FileValidator fileValidator;
 	private final GifMetadataExtractor gifMetadataExtractor;
@@ -24,7 +27,7 @@ public class MetadataProvider<T> {
 
 			String contentType = multipartFile.getContentType();
 			if (contentType == null) {
-				throw new IllegalArgumentException("파일 형식 정보가 없습니다.");
+				throw new MetadataContentTypeNullException();
 			}
 
 			MultipartFileContentType zzalContentType = MultipartFileContentType.fromString(contentType);
@@ -38,11 +41,11 @@ public class MetadataProvider<T> {
 					PicInfo picInfo = picMetadataExtractor.extract(multipartFile);
 					return picInfo;
 
-					default:
-					throw new IllegalArgumentException("지원되지 않는 이미지 형식입니다: " + contentType);
+				default:
+					throw new MetadataUnsupportedFormatException();
 			}
 		} catch (Exception e) {
-			throw new IllegalArgumentException("메타데이터 추출 중 오류 발생: " + e.getMessage(), e);
+			throw new MetadataExtractionFailedException(e);
 		}
 	}
 }
