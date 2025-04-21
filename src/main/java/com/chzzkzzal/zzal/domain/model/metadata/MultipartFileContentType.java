@@ -5,10 +5,8 @@ import com.chzzkzzal.zzal.exception.metadata.MetadataUnsupportedFormatException;
 
 public enum MultipartFileContentType {
 	GIF("image/gif"),
-	JPEG("image/jpeg"),
-	JPG("image/jpg"),
-	PNG("image/png"),
-	SVG("image/svg+xml");
+	JPEG("image/jpeg"), JPG("image/jpg"), PNG("image/png"), SVG("image/svg+xml"),
+	;
 
 	private final String type;
 

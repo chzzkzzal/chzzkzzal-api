@@ -1,28 +1,27 @@
 package com.chzzkzzal.zzal.domain.model.metadata;
 
 public enum AllowedFileExtension {
-    JPG("jpg"),
-    JPEG("jpeg"),
-    SVG("svg"),
-    PNG("png"),
-    GIF("gif");
+	GIF("gif"),
 
-    private final String extension;
+	JPG("jpg"), JPEG("jpeg"), SVG("svg"), PNG("png"),
+	;
 
-    AllowedFileExtension(String extension) {
-        this.extension = extension;
-    }
+	private final String extension;
 
-    public String getExtension() {
-        return extension;
-    }
+	AllowedFileExtension(String extension) {
+		this.extension = extension;
+	}
 
-    public static boolean isAllowed(String ext) {
-        for (AllowedFileExtension allowed : values()) {
-            if (allowed.getExtension().equalsIgnoreCase(ext)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public String getExtension() {
+		return extension;
+	}
+
+	public static boolean isAllowed(String ext) {
+		for (AllowedFileExtension allowed : values()) {
+			if (allowed.getExtension().equalsIgnoreCase(ext)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
