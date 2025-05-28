@@ -1,6 +1,6 @@
 package com.chzzkzzal.zzal_tag.web;
 
-import com.chzzkzzal.zzal.domain.model.zzal.Zzal;
+import com.chzzkzzal.zzal.business.domain.zzal.zzal.entity.Zzal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

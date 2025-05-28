@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ZzalRepeatCountDto {
-    private Long zzalId;         // 게시글 ID
-    private Long repeatedViews;  // 중복(반복) 방문 수
+	private Long zzalId;
+	private Long repeatedViews;
 }

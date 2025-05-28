@@ -39,3 +39,6 @@ application-prod.yml
 application.yml
 testfile/
 WebConfig.java
+
+### git
+.github/

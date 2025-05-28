@@ -1,6 +1,6 @@
 package com.chzzkzzal.streamer;
 
-import com.chzzkzzal.core.common.domain.BaseTimeEntity;
+import com.chzzkzzal.common.domain.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

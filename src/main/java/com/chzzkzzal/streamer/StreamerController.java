@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chzzkzzal.core.common.error.CustomResponse;
-import com.chzzkzzal.zzal.domain.service.ZzalDetailResponse;
+import com.chzzkzzal.common.error.CustomResponse;
+import com.chzzkzzal.zzal.business.application.port.in.query.result.ZzalDetailResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

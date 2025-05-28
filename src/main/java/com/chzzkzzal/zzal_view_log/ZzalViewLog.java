@@ -1,11 +1,8 @@
 package com.chzzkzzal.zzal_view_log;
 
-import static com.chzzkzzal.zzalhits.domain.UserAgentAnalyzer.*;
+import static com.chzzkzzal.zzal.infrastructure.hit.UserAgentAnalyzer.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import com.chzzkzzal.zzalhits.domain.UserAgentAnalyzer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +11,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -75,8 +71,9 @@ public class ZzalViewLog {
 		this.viewDateTime = viewDateTime;
 	}
 
-	public static ZzalViewLog addViewLog(Long zzalId, Long memberId, String uniqueIdentifier, String ipAddress, String userAgent,
-		BrowserType browserType, DeviceType deviceType, LocalDateTime localDateTime){
+	public static ZzalViewLog addViewLog(Long zzalId, Long memberId, String uniqueIdentifier, String ipAddress,
+		String userAgent,
+		BrowserType browserType, DeviceType deviceType, LocalDateTime localDateTime) {
 
 		return ZzalViewLog.builder()
 			.zzalId(zzalId)
